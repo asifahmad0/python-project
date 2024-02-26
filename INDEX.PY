@@ -17,17 +17,20 @@ print("True")
 else:{
     print("False")
 }"""
+"""
+a= "my name is asif ahmad "
+print(a[-22:-1]) #INDEXING
+print(a[0:22])
 
-#a= "my name is asif ahmad "
-#print(a[-22:-1]) #INDEXING
-#print(a[0:22])
+A= input("ENTER YOUR NAME ")
+print(len(A))
+a= "my $ name $ is $ asif $ ahmad $ "
+print(a.count("$")) #count function
 
-#A= input("ENTER YOUR NAME ")
-#print(len(A))
-#a= "my $ name $ is $ asif $ ahmad $ "
-#print(a.count("$")) #count function
-
-"""mark=int(input("enter you marks "))
+"""
+#if else code..........................................
+"""
+mark=int(input("enter you marks "))
 
 if(mark>=90):
     if(mark>=101):
@@ -68,7 +71,8 @@ else:
     print("c is greatest number: ", c)   
 print("A: ",a, "B: ",b, "C: ",c )
 """
-#list
+
+#list code..........................................
 
 #marks=[32,35,52,45,55,95,12,40] # this is list can modify
 #marks=(32,35,52,45,55,95,12,40) # this is tuple can't modify
@@ -113,8 +117,7 @@ tup=("A,B,C,A,C,D,A,B,A")
 Tup =tup.count("A")
 print(Tup)"""
 
-#DISCNARY
-
+#DISCNARY..........................................
 """
 info ={
     "name":"asif ahmad",
@@ -127,6 +130,14 @@ info ={
         "hindi": 45
     }
 }
+print(info["score"])# showing error if have error
+print(info.get["score"])# showing none value if have error
+print(info["score"] ["math"])
+print(list(info.keys()))# converting disc into list
+print(info.items())#
+new_disc = {city:pakur}# add new disc into old disc
+info.update(new_disc)
+print(info)
 #print(info["name"])
 #print(type(info["name"]))
 #info["name"] = "Anam" #replace name value
@@ -135,45 +146,256 @@ info ={
 #keys=info.keys() # for print all keys 
 #print(keys)
 #print(info.value()) for print all values
-#print(info) 
-#print(info["score"])# showing error if have error
-#print(info.get("score"))# showing none value if have error
-#print(info["score"] ["math"])
-#print(info.keys())# converting disc into list
-#print(info.keys("score" ))
-#print(info.items())#
-#new_disc = {"city":"pakur"}# add new disc into old disc
-#info.update(new_disc)
+print(info) 
+"""
+# sets..........................................
+
+#info = set()# empaty sets
+#info.add("ASIF AHMAD")
+#info.add(7)
+#info.add(4)
+#info.add(4)
+#info.add(6)
+#info.remove(4)
+#info.clear()#for empaty the set
+#info.pop()#for remove a randome value
 #print(info)
 
 """
+# get score and record in empaty diractory and show 
+# mathorde 1
+score={ }
+marks=input("enter your maraks ")
+key1=input("enter your subject ")
+marks1=input("enter your maraks ")
+key2=input("enter your subject ")
+marks2=input("enter your maraks ")
 
-"""info = {
-   "table":["a piece of furniture ", "list of fact and figures"]
-  }
-
-print(info.items())
-
-set={"python","c","c++","java","python","javascript","java","c","c++","java"}
-print(type(len(set)))
-
+score[key]=marks
+score[key1]=marks1
+score[key2]=marks2
 """
 
 """
-x=1
-while x<=100:
-    print(x)
-    x+=1
+# mathorde 2
+score={ }
+p=input("enter your phy score ")
+score.update({"physics":p})
 
-x=100
-while x>=1:
-    print(x)
-    x=x-1
+m=input("enter your math score ")
+score.update({"Math":m})
 
+c=input("enter your chme score ")
+score.update({"Chmestry":c})
+
+print(score)
+"""
+"""
+score= set()
+x= input("enter your value ")
+score.add(x)
+print(score)
+print(type(score))
+"""
+#while loop..........................................
+
+# print the table of 3 using while loop
+"""
 x=3
 n=1
 while n<=10:
-    print("3* ",n," = ",x*n)
-    n+=1
+    print("3 * ",n," = ",x*n)
+    n=n+1
+
+# printing the number 1 to 100 using while loop
+ 
+x=1
+while x<=100:
+    print(x)
+    x=x+1    
+"""  
+# printing the number 1 to 100 using while loop
 """
+x=100
+while x>=1:
+    print(x)
+    x=x-1      
+
+x= int(input("enter your numbre "))
+n=1
+while n<=10:
+    print(x," *",n," = ",x*n)
+    n=n+1
+"""
+"""
+num=[1,4,9,16,25,64,81,100]
+idx=0
+while idx < len(num):
+    print(num[idx])
+    idx+=1
+"""
+"""
+num=(1,4,9,16,25,36,49,64,81,100)
+x=int(input("entre your search "))
+i=0
+while i < len(num):
+    if(num[i] == x):
+        print("found at index ",i)
+        break # stope in this code
+    else:
+        print("finding...")
+
+    i+=1
+"""
+"""
+ #ode numbre print
+i =1
+while i<= 10:
+    if(i%2 == 0):
+      i +=1
+      continue #skip
+    print(i)
+    i+=1
+
+    #even numbre print
+i =1
+while i<= 10:
+    if(i%2 != 0):
+      i +=1
+      continue 
+    print(i)
+    i+=1    
+"""
+#for loop ..........................................
+"""
+l=[1,4,16,25,36,49,64,81,100]
+i=int(input("enter the value: "))
+idx=0
+
+for v in l:
+    if i == v: 
+      print("value found: ",v," have on index: ",idx)
+      break
+    else:
+       print("searching...") 
+       idx+=1 
+"""
+#range..............................................
+#s=range(5)
+#print(range(5))
+#print(s[1])
+#print(s[2])
+#print(s[3])
+#print(s[4])
+#for i in s #range(10):
+ #   print(i)
+#for i in range(1,101):#range(start, stop, step)
+ #   print(i) 
+
+#for i in range(100,0,-1):#range(start, stop, step)
+#   print(i) 
+"""
+t=int(input("enter your table: "))
+idx=1
+for i in range(t,t*11,t):#range(start, stop, step)
+ print(t,"*",idx," = ",i) 
+ idx+=1
+"""
+#sum of first n numbre
+#using  while loop
+"""
+n= int(input("enter your numbre: "))
+sum=0
+i = 1
+while i<=n:
+    sum+=i
+    i+=1
+    
+print("total sum of first",n," numbres is: ",sum)
+"""
+#using for loof
+"""
+n= int(input("enter your numbre: "))
+sum=0
+for i in range(1, n+1):
+    sum+=i
+
+print("total sum of first",n," numbres is: ",sum)
+"""
+"""
+n= int(input("enter your numbre: "))
+sum=1
+for i in range(1, n+1):
+    sum*=i
+
+print("total factorial of first",n," numbres is: ",sum)
+"""
+
+#range..............................................
+"""
+def cal_sum(a,b):
+    sum=a+b
+    print(sum)
+    return sum
+
+
+#call the funtion
+cal_sum(2,5)
+
+cal_sum(7,5)
+
+cal_sum(8,9)
+ """
+
+"""
+list=["ironman","spidreman","thor","hulk","eantman"  ]
+
+def add_list(value):
+    for x in value:
+        print(x, end=", ")
+    
+add_list(list)
+ """
+
+# Money converting App Convert USD Into INR
+"""
+i=int(input("entre amount: "))
+def money(usd):
+    inr=usd*83
+    print(usd," USD is ",inr," INR")
+    return 0
+
+money(i)
+"""
+# Recursion
+"""
+def show (n):
+    if ( n == 0):
+        print("hello ists don ")
+        return
+    print(n)
+    show(n-1)
+
+show(3)
+"""
+"""
+def cal_sum (n):
+    if ( n == 0):
+        print("hello ists don ")
+        return 0
+    #print(n)
+    return cal_sum(n-1) + n
+
+sum=cal_sum(5)
+print(sum)
+"""
+
+
+
+
+
+
+
+
+
 
