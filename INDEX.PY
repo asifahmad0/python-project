@@ -379,23 +379,89 @@ def show (n):
 show(3)
 """
 """
-def cal_sum (n):
+def show (n):
     if ( n == 0):
         print("hello ists don ")
         return 0
     #print(n)
-    return cal_sum(n-1) + n
+    return show(n-1) + n
 
-sum=cal_sum(5)
+sum=show(5)
 print(sum)
+""" 
+#file input/output 
 """
+f=open("index.js","r")
+data = f.read()
+print(data)
+print(type(data))
+f.close()
+
+"""
+#creat a file and entre data
+"""
+with open("sample.txt","a+") as f:
+    f.write("Hi everyone\nwe are learning File I/O\n")
+    f.write("Using Java.\nI like Programming in Java \n")
+
+"""  
+#replaced java into python
+"""  
+with open("sample.txt","r") as f:
+    #print(f.read())
+    data=f.read()
+
+new_data = data.replace("Java","Python")
+print(new_data)
+
+with open("sample.txt","w") as f:
+    f.write(new_data)
+"""
+#find learning
+"""
+with open("sample.txt","r") as f:
+    #print(f.read())
+    data=f.read()
+fin=data.find("learning")
+if (fin !=-1):
+    print("its found")
+else:
+    print ("note found ")
+""" 
+#find learning which line exist
+""" 
+def check_for_line():
+    word="learning"
+    data=True
+    line_no=1
+    with open("sample.txt","r") as f:
+        while data:
+            data=f.readline()
+            if (word in data):
+                print(line_no)
+                return
+            line_no +=1
+            
+    return -1
+
+print(check_for_line())   
+"""      
+#object orianted programming
+# ADDING NAME AND NUMBRE IN TXT FILE USING OOPS CLASS
+""" 
+nam=input("enter your name ")
+mob=input('entre your mobile numbre ')
+class student:
+
+    def __init__(self, name, mobile): # costructor mad by me call peramitarised constructor
+        self.name=name
+        self.mobile=mobile
+        with open("student.txt","+a") as f:
+            f.write(name)
+            f.write(mobile)
+
+        print("adding new student Data in Database")
 
 
-
-
-
-
-
-
-
-
+s1 = student(nam,mob)        
+""" 
