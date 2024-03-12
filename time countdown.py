@@ -44,3 +44,13 @@ for i in range(0,num):
     print(" * "*count)
     count-=1
  """
+
+#Project-1, how printer works
+"""
+pages= int(input("Entre how many copys:- "))
+idx=1
+
+while idx<= pages:
+    print("printing your page ",idx)
+    idx+=1
+"""
