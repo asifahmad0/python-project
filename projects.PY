@@ -8,7 +8,7 @@ while idx<= pages:
     print("printing your page ",idx)
     idx+=1
 """
-#------------------------------------------------------------Calandre----------------------------------------
+#------------------------------------------------------------project-2 Calandre----------------------------------------
 # entre year and enter month and get your calendare 
 """
 import calendar
@@ -17,7 +17,7 @@ mm=int(input("entre month "))
 print(calendar.month(yy,mm))
 """
 
-#---------------------------------------------time count downe---------------------------------------
+#---------------------------------------------project-3 time count downe---------------------------------------
 """
 import time
 
@@ -64,7 +64,7 @@ for i in range(0,num):
     print(" * "*count)
     count-=1
  """
-#-------------------------------------------------qr code genrator-------------------------------------------------
+#-------------------------------------------------project-4 qr code genrator-------------------------------------------------
 """
 import qrcode
 url=input("entre your link:-")
@@ -72,7 +72,7 @@ img=qrcode.make(url)
 img.save("qrcode.png")
 """
 
-#-------------------------simple 2 numbre calculatr----------------------------------------------------------------------
+#-------------------------project-5 simple 2 numbre calculatr----------------------------------------------------------------------
 
 """
 num1= int(input("entre your first numbre "))
@@ -99,7 +99,7 @@ elif (sym == "4"):
 else:
     print("Your Entred Invalid Option")
 """
-# A system look time And greating you good morning, good afternoon, good evening, good night------------------------------------
+# ----------------project-6 A system look time And greating you good morning, good afternoon, good evening, good night
 """
 import time
 i= time.strftime("%H")
