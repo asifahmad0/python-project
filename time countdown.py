@@ -9,10 +9,10 @@ def countdown(seco):
         print(timeformat)
         time.sleep(1)
         seco= seco-1
-        print("time Up. your systep was crashed")
+    print("time Up. your systep was crashed")
 
-        seconde= int(input("entre your time in sec:- "))
-        countdown(seconde)
+seconde= int(input("entre your time in sec:- "))
+countdown(seconde)
 """
 
 """
