@@ -117,3 +117,58 @@ elif(i>"15" and i<="19" ):
 elif(i>"19" and i<="23" ):
     print(" Good Night")
 """
+#swape 2 varibles
+"""
+x=int(input("entre your numbre"))
+y=int(input("entre your numbre"))
+
+z=x-y
+x=x-z
+
+print(x,y)
+
+#second methord
+x=5
+y=2
+
+x,y=x+y,y+x
+print(x,y)
+
+#change value togeder
+x=5
+y=2
+
+x,y=y,x
+print(x,y)
+
+# chacke nubre positive, nagative or zero
+
+x=int(input("entre your numbre "))
+
+if x>0:
+    print(" this numbre is positiv +",x)
+elif x<0:
+    print(" this numbre is Nagetiv",x)
+else:
+    print(" this numbre is ",x)
+
+# numbre is odd or even
+x=int(input("entre your numbre "))
+
+if x%2==0:
+    print(" this numbre is even",x)
+else:
+    print(" this numbre is odd ",x)
+
+# leep year or not 
+
+x=int(input("entre your year "))
+
+if x%4==0 and x%100 !=0:
+    print(' it is a leep year')
+
+else:
+    print("it is not a leep year ")
+"""
+
+
