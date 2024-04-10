@@ -1,4 +1,5 @@
 import time
+import random
 
 print("choose your option")
 print("Add New Order entre:-  1 ")
@@ -11,12 +12,15 @@ option=int(input("Entre Your Option:- "))
 if option ==1:
   name= input("entre your name ")
   order=input("entre your Full Order ")
-  date=time.strftime("%d,%m,%y")
-  print("\nName:-",name,"\nYour Order:-", order,"\nOrder Date",date)
+  orderNo= str(random.randrange(1,10)*12345)
+  date=time.strftime("%d,%m,%Y")
+  print("\nOrder No:-",orderNo,"\nName:-",name,"\nYour Order:-", order,"\nOrder Date",date)
 
-  with open("order.txt","+a") as f:
+  with open("order.txt","a") as f:
      
        f.write("\n\nOrder")
+       f.write("\nOrder No:- ")
+       f.write(orderNo)
        f.write("\nOrder Date:- ")
        f.write(date)
        f.write("\nName:- ")
@@ -24,6 +28,7 @@ if option ==1:
        f.write("\nOrder:- ")
        f.write(order)
        f.close 
+       
 
 #for change 
 elif option ==2:
@@ -60,3 +65,5 @@ elif option ==3:
     with open("order.txt","r") as s:
         viwe=s.read()
         print(viwe)
+else:
+   print("Invalid Option")
