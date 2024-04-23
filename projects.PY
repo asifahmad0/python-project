@@ -258,5 +258,11 @@ for i in range(num+1):
     print()
 """
 
+"""import keyword
+key=keyword.kwlist
+x= str(key)
+with open('keyword.txt','w') as f:
+    f.write(x)
+"""
 
 
