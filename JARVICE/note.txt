@@ -1,0 +1,1065 @@
+import pyttsx3
+import speech_recognition 
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+rate = engine.setProperty("rate",170)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def takeCommand():
+    r = speech_recognition.Recognizer()
+    with speech_recognition.Microphone() as source:
+        print("Listening.....")
+        r.pause_threshold = 1
+        r.energy_threshold = 300
+        audio = r.listen(source,0,4)
+
+    try:
+        print("Understanding..")
+        query  = r.recognize_google(audio,language='en-in')
+        print(f"You Said: {query}\n")
+    except Exception as e:
+        print("Say that again")
+        return "None"
+    return query
+
+#2. Greet Me Function 
+
+if __name__ == "__main__":
+    while True:
+        query = takeCommand().lower()
+        if "wake up" in query:
+            from GreetMe import greetMe
+            greetMe()
+
+            while True:
+                query = takeCommand().lower()
+                if "go to sleep" in query:
+                    speak("Ok sir , You can me call anytime")
+                    break 
+#Then Make A NEW File named GreetMe.py in VsCode and paste the following:-
+import pyttsx3
+import datetime
+
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+engine.setProperty("rate",200)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def greetMe():
+    hour  = int(datetime.datetime.now().hour)
+    if hour>=0 and hour<=12:
+        speak("Good Morning,sir")
+    elif hour >12 and hour<=18:
+        speak("Good Afternoon ,sir")
+
+    else:
+        speak("Good Evening,sir")
+
+    speak("Please tell me, How can I help you ?")
+
+
+#3. Conversations
+
+elif "hello" in query:
+        speak("Hello sir, how are you ?")
+        elif "i am fine" in query:
+            speak("that's great, sir")
+        elif "how are you" in query:
+            speak("Perfect, sir")
+        elif "thank you" in query:
+            speak("you are welcome, sir")
+#4. Searching from web
+
+elif "google" in query:
+    from SearchNow import searchGoogle
+    searchGoogle(query)
+elif "youtube" in query:
+    from SearchNow import searchYoutube
+    searchYoutube(query)
+elif "wikipedia" in query:
+    from SearchNow import searchWikipedia
+    searchWikipedia(query)
+
+#Then make a new file and name it SearchNow.py in Vscode and paste the following code :-
+import speech_recognition
+import pyttsx3
+import pywhatkit
+import wikipedia
+import webbrowser
+
+
+def takeCommand():
+    r = speech_recognition.Recognizer()
+    with speech_recognition.Microphone() as source:
+        print("Listening.....")
+        r.pause_threshold = 1
+        r.energy_threshold = 300
+        audio = r.listen(source,0,4)
+    try:
+        print("Understanding..")
+        query  = r.recognize_google(audio,language='en-in')
+        print(f"You Said: {query}\n")
+    except Exception as e:
+        print("Say that again")
+        return "None"
+    return query
+
+query = takeCommand().lower()
+
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+engine.setProperty("rate",170)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def searchGoogle(query):
+    if "google" in query:
+        import wikipedia as googleScrap
+        query = query.replace("jarvis","")
+        query = query.replace("google search","")
+        query = query.replace("google","")
+        speak("This is what I found on google")
+
+        try:
+            pywhatkit.search(query)
+            result = googleScrap.summary(query,1)
+            speak(result)
+
+        except:
+            speak("No speakable output available")
+
+def searchYoutube(query):
+    if "youtube" in query:
+        speak("This is what I found for your search!") 
+        query = query.replace("youtube search","")
+        query = query.replace("youtube","")
+        query = query.replace("jarvis","")
+        web  = "https://www.youtube.com/results?search_query=" + query
+        webbrowser.open(web)
+        pywhatkit.playonyt(query)
+        speak("Done, Sir")
+
+def searchWikipedia(query):
+    if "wikipedia" in query:
+        speak("Searching from wikipedia....")
+        query = query.replace("wikipedia","")
+        query = query.replace("search wikipedia","")
+        query = query.replace("jarvis","")
+        results = wikipedia.summary(query,sentences = 2)
+        speak("According to wikipedia..")
+        print(results)
+        speak(results)
+
+    
+#5. Temperature
+
+elif "temperature" in query:
+    search = "temperature in delhi"
+    url = f"https://www.google.com/search?q={search}"
+    r  = requests.get(url)
+    data = BeautifulSoup(r.text,"html.parser")
+    temp = data.find("div", class_ = "BNeawe").text
+    speak(f"current{search} is {temp}")
+elif "weather" in query:
+    search = "temperature in delhi"
+    url = f"https://www.google.com/search?q={search}"
+    r  = requests.get(url)
+    data = BeautifulSoup(r.text,"html.parser")
+    temp = data.find("div", class_ = "BNeawe").text
+    speak(f"current{search} is {temp}")
+
+6. Time
+
+elif "the time" in query:
+    strTime = datetime.datetime.now().strftime("%H:%M")    
+    speak(f"Sir, the time is {strTime}")
+
+7. Finally Sleep
+
+elif "finally sleep" in query:
+    speak("Going to sleep,sir")
+    exit()
+
+8. Open and Close apps/websites : Open and close apps like word, paint and various websites.
+
+elif "open" in query:
+    from Dictapp import openappweb
+    openappweb(query)
+elif "close" in query:
+    from Dictapp import closeappweb
+    closeappweb(query)
+
+
+Make a new file & name it as Dictapp and paste the following code:-
+
+import os 
+import pyautogui
+import webbrowser
+import pyttsx3
+from time import sleep
+
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+engine.setProperty("rate",200)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+dictapp = {"commandprompt":"cmd","paint":"paint","word":"winword","excel":"excel","chrome":"chrome","vscode":"code","powerpoint":"powerpnt"}
+
+def openappweb(query):
+    speak("Launching, sir")
+    if ".com" in query or ".co.in" in query or ".org" in query:
+        query = query.replace("open","")
+        query = query.replace("jarvis","")
+        query = query.replace("launch","")
+        query = query.replace(" ","")
+        webbrowser.open(f"https://www.{query}")
+    else:
+        keys = list(dictapp.keys())
+        for app in keys:
+            if app in query:
+                os.system(f"start {dictapp[app]}")
+
+def closeappweb(query):
+    speak("Closing,sir")
+    if "one tab" in query or "1 tab" in query:
+        pyautogui.hotkey("ctrl","w")
+        speak("All tabs closed")
+    elif "2 tab" in query:
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        speak("All tabs closed")
+    elif "3 tab" in query:
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        speak("All tabs closed")
+        
+    elif "4 tab" in query:
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        speak("All tabs closed")
+    elif "5 tab" in query:
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        sleep(0.5)
+        pyautogui.hotkey("ctrl","w")
+        speak("All tabs closed")
+
+    else:
+        keys = list(dictapp.keys())
+        for app in keys:
+            if app in query:
+                os.system(f"taskkill /f /im {dictapp[app]}.exe")
+
+    
+
+9. Alarm 
+
+elif "set an alarm" in query:
+    print("input time example:- 10 and 10 and 10")
+    speak("Set the time")
+    a = input("Please tell the time :- ")
+    alarm(a)
+    speak("Done,sir")
+
+
+Above (if __name__ = "__main__")  write this function :-
+
+def alarm(query):
+    timehere = open("Alarmtext.txt","a")
+    timehere.write(query)
+    timehere.close()
+    os.startfile("alarm.py")
+
+
+Now make a new file & name it alarm.py and paste the following code:-
+
+import pyttsx3
+import datetime
+import os 
+
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+engine.setProperty("rate",200)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+extractedtime = open("Alarmtext.txt","rt")
+time = extractedtime.read()
+Time = str(time)
+extractedtime.close()
+
+deletetime = open("Alarmtext.txt","r+")
+deletetime.truncate(0)
+deletetime.close()
+
+def ring(time):
+    timeset = str(time)
+    timenow = timeset.replace("jarvis","")
+    timenow = timenow.replace("set an alarm","")
+    timenow = timenow.replace(" and ",":")
+    Alarmtime = str(timenow)
+    print(Alarmtime)
+    while True:
+        currenttime = datetime.datetime.now().strftime("%H:%M:%S")
+        if currenttime == Alarmtime:
+            speak("Alarm ringing,sir")
+            os.startfile("music.mp3") #You can choose any music or ringtone 
+        elif currenttime + "00:00:30" == Alarmtime:
+            exit()
+
+ring(time)
+
+
+10. Youtube Controls like Play, Pause , Mute , Volume up and down 
+
+elif "pause" in query:
+    pyautogui.press("k")
+    speak("video paused")
+elif "play" in query:
+    pyautogui.press("k")
+    speak("video played")
+elif "mute" in query:
+    pyautogui.press("m")
+    speak("video muted")
+
+elif "volume up" in query:
+    from keyboard import volumeup
+    speak("Turning volume up,sir")
+    volumeup()
+elif "volume down" in query:
+    from keyboard import volumedown
+    speak("Turning volume down, sir")
+    volumedown()
+
+Now make a new file & name it keyboard.py and paste the following code:-
+
+from pynput.keyboard import Key,Controller
+
+from time import sleep
+
+keyboard = Controller()
+
+def volumeup():
+    for i in range(5):
+        keyboard.press(Key.media_volume_up)
+        keyboard.release(Key.media_volume_up)
+        sleep(0.1)
+def volumedown():
+    for i in range(5):
+        keyboard.press(Key.media_volume_down)
+        keyboard.release(Key.media_volume_down)
+        sleep(0.1)
+
+
+11. Reminder
+
+elif "remember that" in query:
+    rememberMessage = query.replace("remember that","")
+    rememberMessage = query.replace("jarvis","")
+    speak("You told me to remember that"+rememberMessage)
+    remember = open("Remember.txt","a")
+    remember.write(rememberMessage)
+    remember.close()
+elif "what do you remember" in query:
+    remember = open("Remember.txt","r")
+    speak("You told me to remember that" + remember.read())
+
+
+Now make a new file & name it "Remember.txt" :- it will make a new text file
+
+
+12. Personalized Playlist : Make your own playlist and let jarvis play a random song from it...
+
+elif "tired" in query:
+    speak("Playing your favourite songs, sir")
+    a = (1,2,3) # You can choose any number of songs (I have only choosen 3)
+    b = random.choice(a)
+    if b==1:
+    webbrowser.open(#Here put the link of your video)
+
+
+13. News Function : It will help you to get the top headlines in your chosen field
+
+IMP : - Here first go to newsapi.org and make an account on it then get your own api key and paste in instead 
+
+Or watch my video if you are unable to get an api key..
+
+
+elif "news" in query:
+    from NewsRead import latestnews
+    latestnews()
+Now make a new file & name it "NewsRead.py" and write the following code in it :-
+
+import requests
+import json
+import pyttsx3
+
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+rate = engine.setProperty("rate",170)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def latestnews():
+    api_dict = {"business" : "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=#here paste your api key",
+            "entertainment" : "https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=#here paste your api key",
+            "health" : "https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=#here paste your api key",
+            "science" :"https://newsapi.org/v2/top-headlines?country=in&category=science&apiKey=#here paste your api key",
+            "sports" :"https://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=#here paste your api key",
+            "technology" :"https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=#here paste your api key"
+}
+
+    content = None
+    url = None
+    speak("Which field news do you want, [business] , [health] , [technology], [sports] , [entertainment] , [science]")
+    field = input("Type field news that you want: ")
+    for key ,value in api_dict.items():
+        if key.lower() in field.lower():
+            url = value
+            print(url)
+            print("url was found")
+            break
+        else:
+            url = True
+    if url is True:
+        print("url not found")
+
+    news = requests.get(url).text
+    news = json.loads(news)
+    speak("Here is the first news.")
+
+    arts = news["articles"]
+    for articles in arts :
+        article = articles["title"]
+        print(article)
+        speak(article)
+        news_url = articles["url"]
+        print(f"for more info visit: {news_url}")
+
+        a = input("[press 1 to cont] and [press 2 to stop]")
+        if str(a) == "1":
+            pass
+        elif str(a) == "2":
+            break
+        
+    speak("thats all")
+
+
+
+14. Calculator
+
+IMP : - Here first go to "https://www.wolframalpha.com/" and make an account on it then get your own api key and paste in instead 
+
+
+Or watch my video if you are unable to get an api key..
+
+
+elif "calculate" in query:
+    from Calculatenumbers import WolfRamAlpha
+    from Calculatenumbers import Calc
+    query = query.replace("calculate","")
+    query = query.replace("jarvis","")
+    Calc(query)
+Now make a new file & name it "Calculatenumbers.py" and write the following code in it :-
+
+
+import wolframalpha
+import pyttsx3
+import speech_recognition
+
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+rate = engine.setProperty("rate",170)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def WolfRamAlpha(query):
+    apikey = "#paste your api key"
+    requester = wolframalpha.Client(apikey)
+    requested = requester.query(query)
+
+    try:
+        answer = next(requested.results).text
+        return answer
+    except:
+        speak("The value is not answerable")
+
+def Calc(query):
+    Term = str(query)
+    Term = Term.replace("jarvis","")
+    Term = Term.replace("multiply","*")
+    Term = Term.replace("plus","+")
+    Term = Term.replace("minus","-")
+    Term = Term.replace("divide","/")
+
+    Final = str(Term)
+    try:
+        result = WolfRamAlpha(Final)
+        print(f"{result}")
+        speak(result)
+
+    except:
+        speak("The value is not answerable")
+      
+15.Whatsapp automation 
+
+
+elif "whatsapp" in query:
+    from Whatsapp import sendMessage
+    sendMessage()
+Now make a new file & name it "Whatsapp.py" and write the following code in it :-
+
+import pywhatkit
+import pyttsx3
+import datetime
+import speech_recognition
+import webbrowser
+from bs4 import BeautifulSoup
+from time import sleep
+import os 
+from datetime import timedelta
+from datetime import datetime
+
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+rate = engine.setProperty("rate",170)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+def takeCommand():
+    r = speech_recognition.Recognizer()
+    with speech_recognition.Microphone() as source:
+        print("Listening.....")
+        r.pause_threshold = 1
+        r.energy_threshold = 300
+        audio = r.listen(source,0,4)
+
+    try:
+        print("Understanding..")
+        query  = r.recognize_google(audio,language='en-in')
+        print(f"You Said: {query}\n")
+    except Exception as e:
+        print("Say that again")
+        return "None"
+    return query
+
+strTime = int(datetime.now().strftime("%H"))
+update = int((datetime.now()+timedelta(minutes = 2)).strftime("%M"))
+
+def sendMessage():
+    speak("Who do you wan to message")
+    a = int(input('''Person 1 - 1
+    Person 2 - 2'''))
+    if a == 1:
+        speak("Whats the message")
+        message = str(input("Enter the message- "))
+        pywhatkit.sendwhatmsg("+91000000000",message,time_hour=strTime,time_min=update)
+    elif a==2:
+        pass
+
+
+
+16. Shutdown system with your voice
+
+
+elif "shutdown the system" in query:
+    speak("Are You sure you want to shutdown")
+    shutdown = input("Do you wish to shutdown your computer? (yes/no)")
+    if shutdown == "yes":
+        os.system("shutdown /s /t 1")
+
+    elif shutdown == "no":
+        break
+
+17. Password Protection
+
+
+#Paste this just below your import files
+for i in range(3):
+    a = input("Enter Password to open Jarvis :- ")
+    pw_file = open("password.txt","r")
+    pw = pw_file.read()
+    pw_file.close()
+    if (a==pw):
+        print("WELCOME SIR ! PLZ SPEAK [WAKE UP] TO LOAD ME UP")
+        break
+    elif (i==2 and a!=pw):
+        exit()
+
+    elif (a!=pw):
+        print("Try Again")
+Paste this inside the while loop :-
+
+elif "change password" in query:
+    speak("What's the new password")
+    new_pw = input("Enter the new password\n")
+    new_password = open("password.txt","w")
+    new_password.write(new_pw)
+    new_password.close()
+    speak("Done sir")
+    speak(f"Your new password is{new_pw}")
+
+    
+
+18. Schedule My Day Function :-
+elif "schedule my day" in query:
+    tasks = [] #Empty list 
+    speak("Do you want to clear old tasks (Plz speak YES or NO)")
+    query = takeCommand().lower()
+    if "yes" in query:
+        file = open("tasks.txt","w")
+        file.write(f"")
+        file.close()
+        no_tasks = int(input("Enter the no. of tasks :- "))
+        i = 0
+        for i in range(no_tasks):
+            tasks.append(input("Enter the task :- "))
+            file = open("tasks.txt","a")
+            file.write(f"{i}. {tasks[i]}\n")
+            file.close()
+    elif "no" in query:
+        i = 0
+        no_tasks = int(input("Enter the no. of tasks :- "))
+        for i in range(no_tasks):
+            tasks.append(input("Enter the task :- "))
+            file = open("tasks.txt","a")
+            file.write(f"{i}. {tasks[i]}\n")
+            file.close()
+Show My Schedule using Desktop Notification Function :-
+elif "show my schedule" in query:
+    file = open("tasks.txt","r")
+    content = file.read()
+    file.close()
+    mixer.init()
+    mixer.music.load("notification.mp3")
+    mixer.music.play()
+    notification.notify(
+        title = "My schedule :-",
+        message = content,
+        timeout = 15
+        )
+
+
+
+19. Open Any App Function :-
+elif "open" in query:   #EASY METHOD
+                    query = query.replace("open","")
+                    query = query.replace("jarvis","")
+                    pyautogui.press("super")
+                    pyautogui.typewrite(query)
+                    pyautogui.sleep(2)
+                    pyautogui.press("enter")   
+20. Internet Speed Function :-
+
+elif "internet speed" in query:
+                    wifi  = speedtest.Speedtest()
+                    upload_net = wifi.upload()/1048576         #Megabyte = 1024*1024 Bytes
+                    download_net = wifi.download()/1048576
+                    print("Wifi Upload Speed is", upload_net)
+                    print("Wifi download speed is ",download_net)
+                    speak(f"Wifi download speed is {download_net}")
+                    speak(f"Wifi Upload speed is {upload_net}")
+
+
+
+
+21. IPL SCORE FUNCTION :-
+elif "ipl score" in query:
+                    from plyer import notification  #pip install plyer
+                    import requests #pip install requests
+                    from bs4 import BeautifulSoup #pip install bs4
+                    url = "https://www.cricbuzz.com/"
+                    page = requests.get(url)
+                    soup = BeautifulSoup(page.text,"html.parser")
+                    team1 = soup.find_all(class_ = "cb-ovr-flo cb-hmscg-tm-nm")[0].get_text()
+                    team2 = soup.find_all(class_ = "cb-ovr-flo cb-hmscg-tm-nm")[1].get_text()
+                    team1_score = soup.find_all(class_ = "cb-ovr-flo")[8].get_text()
+                    team2_score = soup.find_all(class_ = "cb-ovr-flo")[10].get_text()
+
+                    a = print(f"{team1} : {team1_score}")
+                    b = print(f"{team2} : {team2_score}")
+
+                    notification.notify(
+                        title = "IPL SCORE :- ",
+                        message = f"{team1} : {team1_score}\n {team2} : {team2_score}",
+                        timeout = 15
+                    )
+
+
+
+22. GUI OF JARVIS :-
+from INTRO import play_gif
+play_gif
+#paste this just below the password function
+
+Open a New File and Name it as INTRO.py and paste the following code: -
+from tkinter import * #pip install tkinter
+from PIL import Image,ImageTk,ImageSequence #pip install Pillow
+import time
+import pygame  #pip install pygame
+from pygame import mixer
+mixer.init()
+
+root = Tk()
+root.geometry("1000x500")
+
+def play_gif():
+    root.lift()
+    root.attributes("-topmost",True)
+    global img
+    img = Image.open(#enter the gif address)
+    lbl = Label(root)
+    lbl.place(x=0,y=0)
+    i=0
+    mixer.music.load(#enter the music file address)
+    mixer.music.play()
+    
+    for img in ImageSequence.Iterator(img):
+        img = img.resize((1000,500))
+        img = ImageTk.PhotoImage(img)
+        lbl.config(image=img)
+        root.update()
+        time.sleep(0.05)
+    root.destroy()
+
+play_gif()
+root.mainloop()
+
+
+
+23. ROCK PAPER SCISSOR WITH JARVIS :-
+elif "play a game" in query:
+                    from game import game_play
+                    game_play()
+
+
+Open a New File and Name it as game.py and paste the following code: -
+
+import pyttsx3
+import speech_recognition as sr
+import random
+
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+engine.setProperty("rate", 170)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening.....")
+        r.pause_threshold = 1
+        r.energy_threshold = 300
+        audio = r.listen(source,0,4)
+
+    try:
+        print("Recognizing..")
+        query = r.recognize_google(audio , language= 'en-in')
+        print(f"You Said : {query}\n")
+    except Exception as e:
+        print("Say that again")
+        return "None"
+    return query
+
+def game_play():
+    speak("Lets Play ROCK PAPER SCISSORS !!")
+    print("LETS PLAYYYYYYYYYYYYYY")
+    i = 0
+    Me_score = 0
+    Com_score = 0
+    while(i<5):
+        choose = ("rock","paper","scissors") #Tuple
+        com_choose = random.choice(choose)
+        query = takeCommand().lower()
+        if (query == "rock"):
+            if (com_choose == "rock"):
+                speak("ROCK")
+                print(f"Score:- ME :- {Me_score} : COM :- {Com_score}")
+            elif (com_choose == "paper"):
+                speak("paper")
+                Com_score += 1
+                print(f"Score:- ME :- {Me_score} : COM :- {Com_score}")
+            else:
+                speak("Scissors")
+                Me_score += 1
+                print(f"Score:- ME :- {Me_score} : COM :- {Com_score}")
+
+        elif (query == "paper" ):
+            if (com_choose == "rock"):
+                speak("ROCK")
+                Me_score += 1
+                print(f"Score:- ME :- {Me_score+1} : COM :- {Com_score}")
+
+            elif (com_choose == "paper"):
+                speak("paper")
+                print(f"Score:- ME :- {Me_score} : COM :- {Com_score}")
+            else:
+                speak("Scissors")
+                Com_score += 1
+                print(f"Score:- ME :- {Me_score} : COM :- {Com_score}")
+
+        elif (query == "scissors" or query == "scissor"):
+            if (com_choose == "rock"):
+                speak("ROCK")
+                Com_score += 1
+                print(f"Score:- ME :- {Me_score} : COM :- {Com_score}")
+            elif (com_choose == "paper"):
+                speak("paper")
+                Me_score += 1
+                print(f"Score:- ME :- {Me_score} : COM :- {Com_score}")
+            else:
+                speak("Scissors")
+                print(f"Score:- ME :- {Me_score} : COM :- {Com_score}")
+        i += 1
+    
+    print(f"FINAL SCORE :- ME :- {Me_score} : COM :- {Com_score}")
+    
+
+            
+
+
+
+24. SCREENSHOT FUNCTION :-
+elif "screenshot" in query:
+                     import pyautogui #pip install pyautogui
+                     im = pyautogui.screenshot()
+                     im.save("ss.jpg")
+
+
+25. CAMERA FUNCTION :-
+elif "click my photo" in query:
+                    pyautogui.press("super")
+                    pyautogui.typewrite("camera")
+                    pyautogui.press("enter")
+                    pyautogui.sleep(2)
+                    speak("SMILE")
+                    pyautogui.press("enter")
+
+
+#HOPE YOU LIKED IT 
+
+
+26. FOCUS MODE FUNCTION :-
+
+elif "focus mode" in query:
+                    a = int(input("Are you sure that you want to enter focus mode :- [1 for YES / 2 for NO "))
+                    if (a==1):
+                        speak("Entering the focus mode....")
+                        os.startfile("D:\\Coding\\Youtube\\Jarvis\\FocusMode.py")
+                        exit()
+
+                    
+                    else:
+                        pass
+Open a New File and Name it as FocusMode.py and paste the following code: -
+import time
+import datetime
+import ctypes,sys
+def is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
+if is_admin():
+    current_time = datetime.datetime.now().strftime("%H:%M")
+    Stop_time = input("Enter time example:- [10:10]:- ")
+    a = current_time.replace(":",".")
+    a = float(a)
+    b = Stop_time.replace(":",".")
+    b = float(b)
+    Focus_Time = b-a
+    Focus_Time = round(Focus_Time,3)
+    host_path ='C:\Windows\System32\drivers\etc\hosts'
+    redirect = '127.0.0.1'
+
+    
+    print(current_time)
+    time.sleep(2)
+    website_list = ["www.facebook.com","facebook.com"] #Enter the websites that you want to block 
+    if (current_time < Stop_time):
+        with open(host_path,"r+") as file: #r+ is writing+ reading
+            content = file.read()
+            time.sleep(2)
+            for website in website_list:    
+                if website in content:
+                    pass
+                else:
+                    file.write(f"{redirect} {website}\n")
+                    print("DONE")
+                    time.sleep(1)
+            print("FOCUS MODE TURNED ON !!!!")
+
+
+    while True:     
+        
+        current_time = datetime.datetime.now().strftime("%H:%M")
+        website_list = ["www.facebook.com","facebook.com"]    #Enter the websites that you want to block 
+        if (current_time >= Stop_time):
+            with open(host_path,"r+") as file:
+                content = file.readlines()
+                file.seek(0)
+
+                for line in content:
+                    if not any(website in line for website in website_list):
+                        file.write(line)
+
+                file.truncate()
+
+                print("Websites are unblocked !!")
+                file = open("focus.txt","a")
+                file.write(f",{Focus_Time}")        #Write a 0 in focus.txt before starting
+                file.close()
+                break 
+
+else:
+    ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
+
+is_admin()
+
+
+
+
+27. FOCUS GRAPH FUNCTION :-
+
+elif "show my focus" in query:
+                    from FocusGraph import focus_graph
+                    focus_graph()
+
+Open a New File and Name it as FocusGraph.py and paste the following code: -
+
+
+#pip install matplotlib
+import matplotlib.pyplot as pt
+
+def focus_graph():
+    file = open("focus.txt","r")
+    content = file.read()
+    file.close()
+
+    content = content.split(",")
+    x1 = []
+    for i in range(0,len(content)):
+        content[i] = float(content[i])
+        x1.append(i)
+
+    print(content)
+    y1 = content
+
+    pt.plot(x1,y1,color = "red",marker = "o")
+    pt.title("YOUR FOCUSED TIME",fontsize = 16)
+    pt.xlabel("Times",fontsize = 14)
+    pt.ylabel("Focus Time", fontsize = 14)
+    pt.grid()
+    pt.show()
+
+Open a New File and Name it as "focus.txt" and write "0" in it: -
+
+28. TRANSLATOR FUNCTION :-
+elif "translate" in query:
+                    from Translator import translategl
+                    query = query.replace("jarvis","")
+                    query = query.replace("translate","")
+                    translategl(query)
+Open a New File and Name it as Translator.py and paste the following code: -
+
+from fnmatch import translate
+from time import sleep
+from googletrans import Translator
+import googletrans #pip install googletrans
+from gtts import gTTS
+import googletrans
+import pyttsx3
+import speech_recognition 
+import os
+from playsound import playsound
+import time
+
+engine = pyttsx3.init("sapi5")
+voices = engine.getProperty("voices")
+engine.setProperty("voice", voices[0].id)
+rate = engine.setProperty("rate",170)
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+
+def takeCommand():
+    r = speech_recognition.Recognizer()
+    with speech_recognition.Microphone() as source:
+        print("Listening.....")
+        r.pause_threshold = 1
+        r.energy_threshold = 300
+        audio = r.listen(source,0,4)
+
+    try:
+        print("Understanding..")
+        query  = r.recognize_google(audio,language='en-in')
+        print(f"You Said: {query}\n")
+    except Exception as e:
+        print("Say that again")
+        return "None"
+    return query
+
+def translategl(query):
+    speak("SURE SIR")
+    print(googletrans.LANGUAGES)
+    translator = Translator()
+    speak("Choose the language in which you want to translate")
+    b = input("To_Lang :- ")   
+    text_to_translate = translator.translate(query,src = "auto",dest= b,)
+    text = text_to_translate.text
+    try : 
+        speakgl = gTTS(text=text, lang=b, slow= False)
+        speakgl.save("voice.mp3")
+        playsound("voice.mp3")
+        
+        time.sleep(5)
+        os.remove("voice.mp3")
+    except:
+        print("Unable to translate")
+
+
