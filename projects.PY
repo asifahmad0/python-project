@@ -265,4 +265,51 @@ with open('keyword.txt','w') as f:
     f.write(x)
 """
 
+#=========================================================Hotel Manu Project============================================
+"""
+
+print("Welcome To Ahmad Resturant")
+
+menu = {
+    "Pizza":40,
+    "Pasta":50,
+    "Burger":60,
+    "Momo":70,
+    "Coffee":80,
+}
+#------------print Manu----------
+print("Pizza: Rs40\nPasta: Rs50\nBurger: Rs60\nMomo: Rs70\nCoffee: Rs80\n")
+
+#------------------Order Total----------------
+Total_Order=0
+
+#------------------Get Order----------------
+item= input("please Enter Your Order ")
+
+if item in menu:
+    Total_Order += menu[item]
+    print("Your Order ", item ," Is Added in Your Order")
+else:
+    print("Order Item Not Found Please Order Again ")
+
+
+#------------------Get Second Order----------------
+getMor = input("Do You Want Anything more (Y/N ) ")
+
+if getMor =="y" or getMor == "Y":
+
+    item_2= input("please Enter Your Order ")
+
+    if item_2 in menu:
+        Total_Order += menu[item_2]
+        print("Your Order ",item_2, " Is Added in Your Order")
+        print("Please Wait Your Order Is Comming Soon\n", "You Have To Pay Rs ", Total_Order)
+    else:
+        print("Order Item Not Found Please Order Again ")
+
+
+else:
+    print("Please Wait Your Order Is Comming Soon\n", "You Have To Pay ", Total_Order)
+
+"""
 
