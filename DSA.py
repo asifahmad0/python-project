@@ -112,3 +112,77 @@ s = Solution()
 x = s.addBinary(s1,s2)
 print(x)
 """
+
+
+
+# 7. Given a string s consisting of lowercase Latin Letters. Return the first non-repeating character in s. If there is no non-repeating character, return '$'.
+# Note: When you return '$' driver code will output -1. 
+# Mediam Lavel
+#Flipkart, Amazon, Microsoft, D-E-Shaw, MakeMyTrip, Ola Cabs, Payu, Teradata, Goldman Sachs, MAQ Software, InfoEdge, OATS Systems, Tejas Network
+"""
+s = "geeksforgeeks"
+
+class Solution:
+    # Function to find the first non-repeating character in a string.
+    def nonRepeatingChar(self, s):
+        # Step 1: Create a frequency dictionary
+        freq = {}
+        
+        # Step 2: Count frequency of each character
+        for char in s:
+            if char in freq:
+                freq[char] += 1
+            else:
+                freq[char] = 1
+        
+        # Step 3: Find the first character with frequency 1
+        for char in s:
+            if freq[char] == 1:
+                return char
+        
+        # Step 4: If no non-repeating character is found, return '$'
+        return '$'
+
+# Example usage:
+sol = Solution()
+print(sol.nonRepeatingChar(s))  # Output should be 'f'
+"""
+
+# 8.Given an unsorted array arr[]. Rotate the array to the left (counter-clockwise direction) by d steps, where d is a positive integer. Do the mentioned change in the array in place.
+# Note: Consider the array as circular.
+# Mediam Lavel
+# MAQ Software, Amazon, Microsoft
+
+"""
+arr = [1, 2, 3, 4, 5, 6, 7]
+d = 2
+
+class Solution:
+    # Function to rotate an array by d elements in counter-clockwise direction.
+    def rotateArr(self, arr, d):
+        n = len(arr)
+        d = d % n  # Ensure that d is less than n
+        
+        # Helper function to reverse a part of the array
+        def reverse(start, end):
+            while start < end:
+                arr[start], arr[end] = arr[end], arr[start]
+                start += 1
+                end -= 1
+        
+        # Step 1: Reverse the first d elements
+        reverse(0, d - 1)
+        
+        # Step 2: Reverse the remaining elements
+        reverse(d, n - 1)
+        
+        # Step 3: Reverse the entire array
+        reverse(0, n - 1)
+        
+sol = Solution()
+sol.rotateArr(arr, d)
+print(arr)  # Output should be [3, 4, 5, 6, 7, 1, 2]
+
+"""
+
+
