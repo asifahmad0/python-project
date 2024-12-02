@@ -186,3 +186,71 @@ print(arr)  # Output should be [3, 4, 5, 6, 7, 1, 2]
 """
 
 
+# Given two strings, one is a text string txt and the other is a pattern string pat.
+# The task is to print the indexes of all the occurrences of the pattern string in the text string.
+# Use 0-based indexing while returning the indices. 
+# Note: Return an empty list in case of no occurrences of pattern.
+# Microsoft
+"""
+txt = "geeksforgeeks"
+pat = "geek"
+class Solution:
+    def search(self, pat, txt):
+        # code here
+        result = []
+        n = len(txt)
+        m = len(pat)
+        
+        # Iterate through the text and check for the pattern
+        for i in range(n - m + 1):
+            if txt[i:i + m] == pat:
+                result.append(i)
+        
+        return result
+
+
+s = Solution()
+a = s.search(pat,txt)
+print(a)
+"""
+
+
+# Given an array of integers arr[] representing a permutation,
+#  implement the next permutation that rearranges the numbers into the lexicographically next greater permutation.
+#   If no such permutation exists, rearrange the numbers into the lowest possible order (i.e., sorted in ascending order). 
+
+# Note - A permutation of an array of integers refers to a specific arrangement of its elements in a sequence or linear order.
+
+#Infosys, Flipkart, Amazon, Microsoft, FactSet, Hike, MakeMyTrip, Google, Qualcomm, Salesforce
+
+"""
+arr = [1, 2, 3, 6, 5, 4]
+class Solution:
+    def nextPermutation(self, arr):
+        # code here
+        n = len(arr)
+        
+        # Step 1: Find the first decreasing element from the end
+        i = n - 2
+        while i >= 0 and arr[i] >= arr[i + 1]:
+            i -= 1
+        
+        if i >= 0:
+            # Step 2: Find the element just larger than arr[i] from the end
+            j = n - 1
+            while arr[j] <= arr[i]:
+                j -= 1
+            
+            # Step 3: Swap arr[i] and arr[j]
+            arr[i], arr[j] = arr[j], arr[i]
+        
+        # Step 4: Reverse the elements after index i
+        arr[i + 1:] = arr[i + 1:][::-1]
+        
+        return arr
+
+
+s = Solution()
+a= s.nextPermutation(arr)
+print(a) # output 1 2 4 3 5 6
+"""
