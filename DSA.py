@@ -254,3 +254,71 @@ s = Solution()
 a= s.nextPermutation(arr)
 print(a) # output 1 2 4 3 5 6
 """
+
+
+# You are given an array of integer arr[] where each number represents a vote to a candidate.
+# Return the candidates that have votes greater than one-third of the total votes,
+# If there's not a majority vote, return an empty array. 
+
+# Note: The answer should be returned in an increasing format.  # Medium
+
+
+"""
+
+class Solution:
+    def findMajority(self, arr):
+        # Phase 1: Boyer-Moore Voting Algorithm to find two potential candidates
+        if not arr:
+            return []
+        
+        # Initialize two candidates and their counts
+        candidate1, candidate2 = None, None
+        count1, count2 = 0, 0
+        
+        # First pass to find two potential candidates
+        for num in arr:
+            if num == candidate1:
+                count1 += 1
+            elif num == candidate2:
+                count2 += 1
+            elif count1 == 0:
+                candidate1, count1 = num, 1
+            elif count2 == 0:
+                candidate2, count2 = num, 1
+            else:
+                count1 -= 1
+                count2 -= 1
+        
+        # Phase 2: Verify the candidates by counting their occurrences
+        count1, count2 = 0, 0
+        for num in arr:
+            if num == candidate1:
+                count1 += 1
+            elif num == candidate2:
+                count2 += 1
+        
+        # Find the threshold for more than one-third
+        threshold = len(arr) // 3
+        result = []
+        
+        if count1 > threshold:
+            result.append(candidate1)
+        if count2 > threshold:
+            result.append(candidate2)
+        
+        # Return the sorted result
+        return sorted(result)
+
+
+# Example 1
+solution = Solution()
+arr = [3, 3, 4, 2, 4, 4, 2, 4, 4]
+print(solution.findMajority(arr))  # Output: [4]
+
+# Example 2
+arr = [1, 1, 1, 3, 3, 2, 2, 2]
+print(solution.findMajority(arr))  # Output: [2]
+
+"""
+
+
