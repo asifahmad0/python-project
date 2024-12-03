@@ -322,3 +322,57 @@ print(solution.findMajority(arr))  # Output: [2]
 """
 
 
+
+# Given a string s, the task is to find the minimum characters to be added at the front to make the string palindrome.
+
+# Note: A palindrome string is a sequence of characters that reads the same forward and backward.
+#Medium Level
+
+"""
+
+class Solution:
+    def minChar(self, s: str) :
+        # Function to compute the prefix function (KMP algorithm)
+        def compute_prefix_function(s):
+            n = len(s)
+            pi = [0] * n
+            for i in range(1, n):
+                j = pi[i - 1]
+                while j > 0 and s[i] != s[j]:
+                    j = pi[j - 1]
+                if s[i] == s[j]:
+                    j += 1
+                pi[i] = j
+            return pi
+        
+        # Reverse the string
+        rev_s = s[::-1]
+        
+        # Concatenate original string and reverse string with a separator in between
+        combined = s + '#' + rev_s
+        
+        # Compute the prefix function for the combined string
+        pi = compute_prefix_function(combined)
+        
+        # The number of characters to add is the difference between the length of s
+        # and the length of the longest matching prefix-suffix.
+        longest_prefix_suffix = pi[-1]
+        
+        # Return the number of characters to be added at the front
+        return len(s) - longest_prefix_suffix
+
+
+# Example 1
+solution = Solution()
+s = "aacecaaa"
+print(solution.minChar(s))  # Output: 2 (We need to add "aa" in front)
+
+# Example 2
+s = "abcd"
+print(solution.minChar(s))  # Output: 3 (We need to add "dcb" in front)
+"""
+
+
+
+
+
