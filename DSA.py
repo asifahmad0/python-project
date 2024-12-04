@@ -372,7 +372,60 @@ s = "abcd"
 print(solution.minChar(s))  # Output: 3 (We need to add "dcb" in front)
 """
 
+# The cost of stock on each day is given in an array price[].
+# Each day you may decide to either buy or sell the stock at price[i], 
+# you can even buy and sell the stock on the same day. Find the maximum profit that you can get.
+# Note: A stock can only be sold if it has been bought previously and multiple stocks cannot be held on any given day.
+# Hard Lavel
+# Paytm, Flipkart, Morgan Stanley, Accolite, Amazon, Microsoft, Samsung, D-E-Shaw, Hike, Make MyTrip, Ola Cabs, Oracle, Walmart,
+# Goldman Sachs, Directi, Intuit, SAP Labs, Quikr, Facebook, Salesforce, Pubmatic, Sapient, Swiggy
 
+"""
+prices= [100, 180, 260, 310, 40, 535, 695]
+
+class Solution:
+    def maximumProfit(self, prices) -> int:
+        # Initialize variable to keep track of the total profit
+        profit = 0
+        
+        # Iterate through the prices array and add up all the profitable price increases
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i - 1]:
+                profit += prices[i] - prices[i - 1]
+        
+        return profit
+
+s = Solution()
+x = s.maximumProfit(prices)
+print(x)
+
+"""
+
+# You are given two strings of equal lengths, s1 and s2. The task is to check if s2 is a rotated version of the string s1.
+# Note: The characters in the strings are in lowercase.
+# Easy Lavel # Oracle, Adobe
+
+"""
+s1 = "abcd"
+s2 = "cdab"
+
+class Solution:
+    # Function to check if two strings are rotations of each other or not.
+    def areRotations(self, s1, s2):
+        # If the lengths of the strings are not equal, they cannot be rotations
+        if len(s1) != len(s2):
+            return False
+        
+        # Concatenate s1 with itself and check if s2 is a substring of this concatenated string
+        if s2 in (s1 + s1):
+            return True
+        return False
+
+s = Solution()
+x = s.areRotations(s1,s2)
+print(x)
+
+"""
 
 
 
