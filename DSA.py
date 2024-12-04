@@ -186,7 +186,7 @@ print(arr)  # Output should be [3, 4, 5, 6, 7, 1, 2]
 """
 
 
-# Given two strings, one is a text string txt and the other is a pattern string pat.
+# 9. Given two strings, one is a text string txt and the other is a pattern string pat.
 # The task is to print the indexes of all the occurrences of the pattern string in the text string.
 # Use 0-based indexing while returning the indices. 
 # Note: Return an empty list in case of no occurrences of pattern.
@@ -215,7 +215,7 @@ print(a)
 """
 
 
-# Given an array of integers arr[] representing a permutation,
+# 10 Given an array of integers arr[] representing a permutation,
 #  implement the next permutation that rearranges the numbers into the lexicographically next greater permutation.
 #   If no such permutation exists, rearrange the numbers into the lowest possible order (i.e., sorted in ascending order). 
 
@@ -256,7 +256,7 @@ print(a) # output 1 2 4 3 5 6
 """
 
 
-# You are given an array of integer arr[] where each number represents a vote to a candidate.
+# 11 You are given an array of integer arr[] where each number represents a vote to a candidate.
 # Return the candidates that have votes greater than one-third of the total votes,
 # If there's not a majority vote, return an empty array. 
 
@@ -323,7 +323,7 @@ print(solution.findMajority(arr))  # Output: [2]
 
 
 
-# Given a string s, the task is to find the minimum characters to be added at the front to make the string palindrome.
+# 12 Given a string s, the task is to find the minimum characters to be added at the front to make the string palindrome.
 
 # Note: A palindrome string is a sequence of characters that reads the same forward and backward.
 #Medium Level
@@ -372,7 +372,7 @@ s = "abcd"
 print(solution.minChar(s))  # Output: 3 (We need to add "dcb" in front)
 """
 
-# The cost of stock on each day is given in an array price[].
+# 13 The cost of stock on each day is given in an array price[].
 # Each day you may decide to either buy or sell the stock at price[i], 
 # you can even buy and sell the stock on the same day. Find the maximum profit that you can get.
 # Note: A stock can only be sold if it has been bought previously and multiple stocks cannot be held on any given day.
@@ -401,7 +401,7 @@ print(x)
 
 """
 
-# You are given two strings of equal lengths, s1 and s2. The task is to check if s2 is a rotated version of the string s1.
+# 14 You are given two strings of equal lengths, s1 and s2. The task is to check if s2 is a rotated version of the string s1.
 # Note: The characters in the strings are in lowercase.
 # Easy Lavel # Oracle, Adobe
 
