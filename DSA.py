@@ -428,4 +428,67 @@ print(x)
 """
 
 
+# 15. Given an array prices[] of length n, representing the prices of the stocks on different days.
+# The task is to find the maximum profit possible by buying and selling the stocks on different days when at most one transaction is allowed.
+# Here one transaction means 1 buy + 1 Sell. If it is not possible to make a profit then return 0.
+# Note: Stock must be bought before being sold.
+# Easy Lavel    
+# Bloomberg, Facebook, Intel, Infosys, Zoho, Morgan Stanley, Amazon, Microsoft, Samsung, Yahoo, PayPal, Nvidia,
+# Oracle, Visa, Walmart, Goldman Sachs, TCS, Adobe, Google, IBM, Accenture, Apple, Uber
+
+"""
+class Solution:
+    def maximumProfit(self, prices):
+        # Edge case: if the prices array is empty or has one price, no profit can be made
+        if not prices or len(prices) < 2:
+            return 0
+        
+        # Initialize min_price with a large number and max_profit to 0
+        min_price = float('inf')
+        max_profit = 0
+        
+        # Iterate through the prices array
+        for price in prices:
+            # Update the min_price if we find a new lower price
+            if price < min_price:
+                min_price = price
+            # Calculate the profit if we sell at the current price
+            profit = price - min_price
+            # Update max_profit if the calculated profit is greater
+            if profit > max_profit:
+                max_profit = profit
+        
+        # Return the maximum profit found
+        return max_profit
+
+
+# Example usage:
+sol = Solution()
+prices = [7, 1, 5, 3, 6, 4]
+print(sol.maximumProfit(prices))  # Output: 5
+
+"""
+
+
+# 16. Given an array arr[] containing only 0s, 1s, and 2s. Sort the array in ascending order.
+# Easy Lavel
+# Paytm, Flipkart, Morgan Stanley, Amazon, Microsoft, OYO Rooms, Samsung, Snapdeal, Hike,
+# MakeMyTrip, Ola Cabs, Walmart, MAQ Software, Adobe, Yatra.com, SAP Labs, Qualcomm
+
+"""
+arr= [0, 1, 2, 0, 1, 2]
+class Solution:
+    # Function to sort an array of 0s, 1s, and 2s
+    def sort012(self, arr):
+        # code here
+        arr.sort()
+        
+        return arr
+
+s = Solution()
+x = s.sort012(arr)
+print(x)
+
+"""
+
 
