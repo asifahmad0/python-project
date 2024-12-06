@@ -492,3 +492,119 @@ print(x)
 """
 
 
+# 15. Given an array arr[] denoting heights of N towers and a positive integer K.
+
+# For each tower, you must perform exactly one of the following operations exactly once.
+
+# Increase the height of the tower by K
+# Decrease the height of the tower by K
+# Find out the minimum possible difference between the height of the shortest and tallest towers after you have modified each tower.
+
+# You can find a slight modification of the problem here.
+# Note: It is compulsory to increase or decrease the height by K for each tower. After the operation,
+#  the resultant array should not contain any negative integers.
+# Mediam Level
+# Microsoft, Addobe
+
+"""
+arr = [1, 5, 8, 10]
+k = 2
+
+class Solution:
+    def getMinDiff(self, arr, k):
+        # First, sort the array
+        arr.sort()
+
+        # Number of towers
+        n = len(arr)
+        
+        # If there is only one tower, the difference is 0 after any operation
+        if n == 1:
+            return 0
+        
+        # Initialize the result as the difference between the maximum and minimum towers
+        result = arr[n - 1] - arr[0]
+
+        # Loop through all possible ways to modify the towers
+        for i in range(1, n):
+            # Max of (arr[i-1] + K) and (arr[n-1] - K) and
+            # Min of (arr[0] + K) and (arr[i] - K)
+            max_height = max(arr[i - 1] + k, arr[n - 1] - k)
+            min_height = min(arr[0] + k, arr[i] - k)
+            
+            # Update the result with the minimum difference found
+            result = min(result, max_height - min_height)
+
+        return result
+
+s = Solution()
+x = s.getMinDiff(arr, k)
+print(x)
+"""
+
+
+# 16. Given an integer array citations[], where citations[i] is the number of citations a researcher received for the ith paper.
+#  The task is to find the H-index.
+# H-Index is the largest value such that the researcher has at least H papers that have been cited at least H times.
+# Mediam Level
+
+"""
+
+citations = [6, 5, 3, 1, 0]
+
+class Solution:
+    # Function to find hIndex
+    def hIndex(self, citations):
+        #code here
+        # Sort the citations array in non-decreasing order
+        citations.sort()
+        
+        # Initialize hIndex
+        n = len(citations)
+        hIndex = 0
+        
+        # Loop through the sorted citations
+        for i in range(n):
+            # The number of papers with at least 'citations[i]' citations
+            # is the number of papers from index 'i' to the end
+            if citations[i] >= n - i:
+                hIndex = n - i
+                break
+        
+        return hIndex
+
+s = Solution()
+x = s.hIndex(citations)
+print(x)
+"""
+
+
+# 17. Given an integer array arr[]. You need to find the maximum sum of a subarray.
+
+"""
+arr = [2, 3, -8, 7, -1, 2, 3]
+class Solution:
+    ##Complete this function
+    #Function to find the sum of contiguous subarray with maximum sum.
+    def maxSubArraySum(self,arr):
+        
+        # Initialize variables
+        current_sum = arr[0]  # Start with the first element
+        max_sum = arr[0]  # Start with the first element
+        
+        # Loop through the array starting from the second element
+        for i in range(1, len(arr)):
+            # Update current_sum to be either the current element itself
+            # or the current element + previous subarray sum
+            current_sum = max(arr[i], current_sum + arr[i])
+            
+            # Update max_sum if current_sum is greater than max_sum
+            max_sum = max(max_sum, current_sum)
+        
+        return max_sum
+
+s = Solution()
+
+x = s.maxSubArraySum(arr)
+print(x)
+"""
