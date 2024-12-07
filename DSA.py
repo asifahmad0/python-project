@@ -608,3 +608,118 @@ s = Solution()
 x = s.maxSubArraySum(arr)
 print(x)
 """
+
+
+
+# 18. Given an array of integers arr[]. Find the Inversion Count in the array.
+# Two elements arr[i] and arr[j] form an inversion if arr[i] > arr[j] and i < j.
+# Inversion Count: For an array, inversion count indicates how far (or close) the array is from being sorted.
+#  If the array is already sorted then the inversion count is 0.
+# If an array is sorted in the reverse order then the inversion count is the maximum. 
+# Mediam Lavel # Flipkart, Amazon, Microsoft, MakeMyTrip, Adobe, BankBazaar, Myntra
+
+"""
+arr = [2, 4, 1, 3, 5]
+class Solution:
+    #User function Template for python3
+    #Function to count inversions in the array.
+    def inversionCount(self, arr):
+        # Your Code Here
+        # Helper function for merge sort and counting inversions
+        def merge_and_count(arr, temp_arr, left, right):
+            if left == right:
+                return 0
+            mid = (left + right) // 2
+            inv_count = 0
+            inv_count += merge_and_count(arr, temp_arr, left, mid)
+            inv_count += merge_and_count(arr, temp_arr, mid + 1, right)
+            inv_count += merge(arr, temp_arr, left, mid, right)
+            return inv_count
+        
+        # Function to merge two halves and count inversions
+        def merge(arr, temp_arr, left, mid, right):
+            i = left    # Starting index for left subarray
+            j = mid + 1 # Starting index for right subarray
+            k = left    # Starting index to be sorted
+            inv_count = 0
+            
+            # Merge the two subarrays while counting inversions
+            while i <= mid and j <= right:
+                if arr[i] <= arr[j]:
+                    temp_arr[k] = arr[i]
+                    i += 1
+                else:
+                    temp_arr[k] = arr[j]
+                    inv_count += (mid - i + 1)  # All elements left in the left subarray are greater than arr[j]
+                    j += 1
+                k += 1
+
+            # Copy the remaining elements of left subarray, if any
+            while i <= mid:
+                temp_arr[k] = arr[i]
+                i += 1
+                k += 1
+
+            # Copy the remaining elements of right subarray, if any
+            while j <= right:
+                temp_arr[k] = arr[j]
+                j += 1
+                k += 1
+
+            # Copy the sorted subarray into the original array
+            for i in range(left, right + 1):
+                arr[i] = temp_arr[i]
+            
+            return inv_count
+
+        # Create a temporary array for merging
+        temp_arr = [0] * len(arr)
+        return merge_and_count(arr, temp_arr, 0, len(arr) - 1)
+
+s = Solution()
+x = s.inversionCount(arr)
+print(x)
+"""
+
+# 19. Given an array arr[] that contains positive and negative integers (may contain 0 as well).
+# Find the maximum product that we can get in a subarray of arr[].
+# Note: It is guaranteed that the output fits in a 32-bit integer.
+# Mediam Lavel # Morgan Stanley, Amazon, Microsoft, OYO Rooms, D-E-Shaw Google
+
+"""
+arr = [-2, 6, -3, -10, 0, 2]
+class Solution:
+
+    def maxProduct(self,arr):
+
+	# Function to find maximum
+	# If the array is empty, we cannot compute a product
+        if not arr:
+            return 0
+        
+        # Initialize the max and min products as the first element
+        max_product = arr[0]
+        min_product = arr[0]
+        result = arr[0]
+        
+        # Traverse the array starting from the second element
+        for i in range(1, len(arr)):
+            # If the current element is negative, swap max and min products
+            if arr[i] < 0:
+                max_product, min_product = min_product, max_product
+            
+            # Update the max and min products
+            max_product = max(arr[i], max_product * arr[i])
+            min_product = min(arr[i], min_product * arr[i])
+            
+            # Update the result to be the maximum of the result so far and max_product
+            result = max(result, max_product)
+        
+        return result
+
+
+s = Solution()
+
+x = s.maxProduct(arr)
+print(x)
+"""
