@@ -517,26 +517,21 @@ class Solution:
 
         # Number of towers
         n = len(arr)
+	
+        res = arr[n - 1]- arr[0]
+    
+    
+        for i in range(1, len(arr)):
+            if arr[i] - k <0:
+                continue
         
-        # If there is only one tower, the difference is 0 after any operation
-        if n == 1:
-            return 0
-        
-        # Initialize the result as the difference between the maximum and minimum towers
-        result = arr[n - 1] - arr[0]
-
-        # Loop through all possible ways to modify the towers
-        for i in range(1, n):
-            # Max of (arr[i-1] + K) and (arr[n-1] - K) and
-            # Min of (arr[0] + K) and (arr[i] - K)
-            max_height = max(arr[i - 1] + k, arr[n - 1] - k)
-            min_height = min(arr[0] + k, arr[i] - k)
-            
-            # Update the result with the minimum difference found
-            result = min(result, max_height - min_height)
-
-        return result
-
+            minH = min(arr[0] + k, arr[i]-k)
+    
+            maxH = max(arr[i - 1] + k, arr[n-1] -k)
+    
+            res = min(res, maxH - minH)
+    
+        return res
 s = Solution()
 x = s.getMinDiff(arr, k)
 print(x)
