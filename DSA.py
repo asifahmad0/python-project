@@ -718,3 +718,83 @@ s = Solution()
 x = s.maxProduct(arr)
 print(x)
 """
+
+
+# 20. Given an array of integers arr[] in a circular fashion.
+# Find the maximum subarray sum that we can get if we assume the array to be circular. 
+# Amazon Microsoft
+# Hard Level
+
+"""
+def circularSubarraySum(arr):
+    n = len(arr)
+    
+    # Case 1: Find the maximum subarray sum using Kadane's algorithm for a non-circular array
+    def kadane(arr):
+        max_sum = arr[0]
+        current_sum = arr[0]
+        for i in range(1, len(arr)):
+            current_sum = max(arr[i], current_sum + arr[i])
+            max_sum = max(max_sum, current_sum)
+        return max_sum
+    
+    max_kadane = kadane(arr)
+    
+    # Case 2: Find the minimum subarray sum using Kadane's algorithm (invert signs)
+    def kadane_min(arr):
+        min_sum = arr[0]
+        current_sum = arr[0]
+        for i in range(1, len(arr)):
+            current_sum = min(arr[i], current_sum + arr[i])
+            min_sum = min(min_sum, current_sum)
+        return min_sum
+    
+    min_kadane = kadane_min(arr)
+    
+    # Case 3: Find the total sum of the array
+    total_sum = sum(arr)
+    
+    # If all elements are negative, then the maximum circular subarray sum is just the maximum subarray sum
+    if total_sum == min_kadane:
+        return max_kadane
+    
+    # Return the maximum of the Kadane result or the total_sum - min_kadane (circular sum)
+    return max(max_kadane, total_sum - min_kadane)
+
+# Example usage
+arr = [8, -8, 9, -9, 10, -11, 12]
+print(circularSubarraySum(arr))  # Output will be the maximum circular subarray sum
+
+"""
+
+# 21. Given an array of Intervals arr[][],
+# where arr[i] = [starti, endi]. The task is to merge all of the overlapping Intervals.
+# Medium Level 
+# Microsoft Amazon Google Netflix 
+
+"""
+class Solution:
+    def mergeOverlap(self, arr):
+        # Step 1: Sort the intervals by start time
+        arr.sort(key=lambda x: x[0])
+        
+        # Step 2: Create a result list to store merged intervals
+        merged_intervals = []
+        
+        # Step 3: Iterate through the sorted intervals
+        for interval in arr:
+            # If merged_intervals is empty or no overlap, add the interval
+            if not merged_intervals or merged_intervals[-1][1] < interval[0]:
+                merged_intervals.append(interval)
+            else:
+                # There is overlap, so merge the current interval
+                merged_intervals[-1][1] = max(merged_intervals[-1][1], interval[1])
+        
+        # Return the merged intervals
+        return merged_intervals
+
+# Example usage
+sol = Solution()
+arr = [[1, 3], [2, 4], [6, 8], [7, 10], [9, 12]]
+print(sol.mergeOverlap(arr))  # Output will be [[1, 4], [6, 12]]
+"""
