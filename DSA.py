@@ -798,3 +798,79 @@ sol = Solution()
 arr = [[1, 3], [2, 4], [6, 8], [7, 10], [9, 12]]
 print(sol.mergeOverlap(arr))  # Output will be [[1, 4], [6, 12]]
 """
+
+
+# 22. You are given an integer array arr[]. Your task is to find the smallest positive number missing from the array.
+# Note: Positive number starts from 1. The array can have negative integers too.
+# Medium Level
+# Accolite, Amazon, Samsung, Snapdeal
+
+"""
+class Solution:
+    
+    # Function to find the smallest positive number missing from the array.
+    def missingNumber(self, arr):
+        n = len(arr)
+        
+        # Step 1: Place each number in its correct position.
+        for i in range(n):
+            while 1 <= arr[i] <= n and arr[arr[i] - 1] != arr[i]:
+                # Swap arr[i] and arr[arr[i] - 1] to put the number in its correct index.
+                arr[arr[i] - 1], arr[i] = arr[i], arr[arr[i] - 1]
+        
+        # Step 2: Find the first index where arr[i] != i + 1
+        for i in range(n):
+            if arr[i] != i + 1:
+                return i + 1
+        
+        # Step 3: If all numbers from 1 to n are present, the missing number is n + 1.
+        return n + 1
+
+arr = [3, 4, -1, 1]
+solution = Solution()
+print(solution.missingNumber(arr))  # Output will be 2
+
+"""
+
+# 23. Geek has an array of non-overlapping intervals intervals where intervals[i] = [starti,
+# endi] represent the start and the end of the ith event and intervals is sorted in ascending order by starti.
+# He wants to add a new interval newInterval= [newStart, newEnd] where newStart and newEnd represent the start and end of this interval.
+
+# Help Geek to insert newInterval into intervals such that intervals is still sorted in ascending order by starti
+# and intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
+
+# Medium Level 
+
+"""
+class Solution:
+    def insertInterval(self, intervals, newInterval):
+        result = []
+        i = 0
+        n = len(intervals)
+
+        # Step 1: Add all intervals that come before the new interval
+        while i < n and intervals[i][1] < newInterval[0]:
+            result.append(intervals[i])
+            i += 1
+
+        # Step 2: Merge overlapping intervals
+        while i < n and intervals[i][0] <= newInterval[1]:
+            newInterval[0] = min(newInterval[0], intervals[i][0])  # Update start
+            newInterval[1] = max(newInterval[1], intervals[i][1])  # Update end
+            i += 1
+        
+        # Step 3: Add the merged interval
+        result.append(newInterval)
+
+        # Step 4: Add all intervals that come after the new interval
+        while i < n:
+            result.append(intervals[i])
+            i += 1
+
+        return result
+
+intervals = [[1, 3], [6, 9]]
+newInterval = [2, 5]
+solution = Solution()
+print(solution.insertInterval(intervals, newInterval))
+"""
