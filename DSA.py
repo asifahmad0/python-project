@@ -874,3 +874,101 @@ newInterval = [2, 5]
 solution = Solution()
 print(solution.insertInterval(intervals, newInterval))
 """
+
+
+# 24. Given a string s, the objective is to convert it into integer format without utilizing any built-in functions.
+# Refer the below steps to know about atoi() function.
+# Cases for atoi() conversion:
+
+# Skip any leading whitespaces.
+# Check for a sign (‘+’ or ‘-‘), default to positive if no sign is present.
+# Read the integer by ignoring leading zeros until a non-digit character is encountered or end of the string is reached.
+# If no digits are present, return 0.
+# If the integer is greater than 231 – 1, then return 231 – 1 and if the integer is smaller than -231, then return -231.
+# Medium Level 
+# Morgan Stanley, Amazon, Microsoft, Payu, Adobe, Code Brew
+
+"""
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        # Step 1: Skip leading whitespaces
+        i = 0
+        n = len(s)
+        
+        # Skip all whitespaces at the beginning
+        while i < n and s[i] == ' ':
+            i += 1
+        
+        # Step 2: Handle optional sign
+        if i < n and (s[i] == '+' or s[i] == '-'):
+            sign = -1 if s[i] == '-' else 1
+            i += 1
+        else:
+            sign = 1
+        
+        # Step 3: Read digits
+        result = 0
+        while i < n and s[i].isdigit():
+            digit = ord(s[i]) - ord('0')  # Convert char to digit
+            result = result * 10 + digit
+            i += 1
+        
+        # Step 4: Apply the sign
+        result *= sign
+        
+        # Step 5: Handle overflow/underflow
+        INT_MAX = 2**31 - 1
+        INT_MIN = -2**31
+        
+        if result > INT_MAX:
+            return INT_MAX
+        elif result < INT_MIN:
+            return INT_MIN
+        return result
+
+
+solution = Solution()
+
+# Test cases
+print(solution.myAtoi("42"))               # Output: 42
+print(solution.myAtoi("   -42"))           # Output: -42
+print(solution.myAtoi("4193 with words"))  # Output: 4193
+print(solution.myAtoi("words and 987"))    # Output: 0
+print(solution.myAtoi("-91283472332"))     # Output: -2147483648 (overflow)
+
+"""
+
+# 25. Given a 2D array intervals[][] of representing intervals where intervals [i] = [starti, endi ].
+#  Return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+#  Medium Level
+
+"""
+class Solution:
+    def minRemoval(self, intervals):
+        # Step 1: Sort intervals based on the end time
+        intervals.sort(key=lambda x: x[1])
+        
+        # Step 2: Initialize variables
+        last_end = float('-inf')  # Initially, no interval has been selected
+        non_overlap_count = 0  # To count the number of non-overlapping intervals
+
+        # Step 3: Iterate through the sorted intervals
+        for interval in intervals:
+            # If current interval does not overlap with the last selected one
+            if interval[0] >= last_end:
+                non_overlap_count += 1  # Select this interval
+                last_end = interval[1]  # Update the end time to the current interval's end
+
+        # Step 4: The minimum number of intervals to remove is the total intervals minus non-overlapping intervals
+        return len(intervals) - non_overlap_count
+
+
+solution = Solution()
+
+# Test cases
+print(solution.minRemoval([[1,2],[2,3],[3,4],[1,3]]))  # Output: 1
+print(solution.minRemoval([[1,2],[1,2],[1,2]]))        # Output: 2
+print(solution.minRemoval([[1,2],[2,3]]))              # Output: 0
+print(solution.minRemoval([[1,2],[3,4],[5,6],[7,8]]))  # Output: 0
+
+"""
