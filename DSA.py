@@ -972,3 +972,51 @@ print(solution.minRemoval([[1,2],[2,3]]))              # Output: 0
 print(solution.minRemoval([[1,2],[3,4],[5,6],[7,8]]))  # Output: 0
 
 """
+
+# 26. Given two sorted arrays a[] and b[] of size n and m respectively, the task is to merge them in sorted order without using any extra space.
+# Modify a[] so that it contains the first n elements and modify b[] so that it contains the last m elements.
+
+# Medium Level 
+# Zoho, Microsoft, Snapdeal, Goldman Sachs, Adobe, Linkedin, Amdocs, Brocade, Juniper Networks, Quikr, Synopsys
+
+"""
+class Solution:
+    def mergeArrays(self, a, b):
+        # code here
+        n = len(a)
+        m = len(b)
+        
+        # Step 1: Start merging by comparing elements from end of a[] and start of b[]
+        i = n - 1  # Last index of a[]
+        j = 0      # First index of b[]
+        
+        # Step 2: Merge elements into their correct positions
+        while i >= 0 and j < m:
+            if a[i] > b[j]:
+                # Swap a[i] and b[j]
+                a[i], b[j] = b[j], a[i]
+                i -= 1
+                j += 1
+            else:
+                break
+        
+        # Step 3: Sort array a[] to maintain its sorted order
+        a.sort()
+        
+        # Step 4: Sort array b[] to maintain its sorted order
+        b.sort()
+
+        return a, b
+
+a = [1, 3, 5, 7] 
+b = [0, 2, 6, 8, 9]
+
+c = [1, 2, 3]
+d = [5, 8, 9]
+
+s= Solution()
+x = s.mergeArrays(a,b)
+y = s.mergeArrays(c,d)
+print(x)
+print(y)
+"""
