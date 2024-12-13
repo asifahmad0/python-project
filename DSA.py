@@ -1020,3 +1020,44 @@ y = s.mergeArrays(c,d)
 print(x)
 print(y)
 """
+# A sorted array of distinct elements arr[] is rotated at some unknown point, the task is to find the minimum element in it.
+# easy level
+# Morgan Stanley, Amazon, Microsoft, Samsung, Snapdeal Adobe, Times Internet 
+
+"""
+arr= [5, 6, 1, 2, 3, 4]
+
+class Solution: # Methord 1 Normal Aproach
+    def findMin(self, arr):
+        #complete the function here
+        ar= list(arr)
+        ar.sort()
+        return ar[0]
+s = Solution()
+x = s.findMin(arr)
+print(x)
+"""
+
+"""
+class Solution: # Methord 2 binary search
+    def findMin(self, arr):
+        #complete the function here
+        left, right = 0, len(arr) - 1
+        
+        while left < right:
+            mid = left + (right - left) // 2
+            
+            # If the middle element is greater than the rightmost element,
+            # the minimum element is in the right half
+            if arr[mid] > arr[right]:
+                left = mid + 1
+            else:
+                right = mid
+        
+        # When left == right, it points to the minimum element
+        return arr[left]
+
+s = Solution()
+y = s.findMin(arr)
+print(y)
+"""
