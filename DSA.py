@@ -1061,3 +1061,29 @@ s = Solution()
 y = s.findMin(arr)
 print(y)
 """
+
+# Given a sorted and rotated array arr[] of distinct elements,
+# the task is to find the index of a target key. Return -1 if the key is not found.
+# mediam level
+# Paytm, Flipkart, Amazon, Microsoft, Snapdeal, D-E-Shaw, FactSet, Hike, MakeMyTrip, Intuit, Adobe, Google, BankBazaar, Times Internet
+
+"""
+class Solution:
+    def search(self,arr,key):
+        # Complete this function
+        
+        n = len(arr)
+        result =-1
+        for i in range(n):
+            if arr[i] == key:
+                result=i
+                
+        return result
+
+
+s= Solution()
+x= s.search(arr= [5, 6, 7, 8, 9, 10, 1, 2, 3],key = 3)
+y= s.search(arr= [3, 5, 1, 2],key = 6)
+print(x)
+print(y)
+"""
