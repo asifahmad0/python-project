@@ -1020,7 +1020,7 @@ y = s.mergeArrays(c,d)
 print(x)
 print(y)
 """
-# A sorted array of distinct elements arr[] is rotated at some unknown point, the task is to find the minimum element in it.
+# 27. A sorted array of distinct elements arr[] is rotated at some unknown point, the task is to find the minimum element in it.
 # easy level
 # Morgan Stanley, Amazon, Microsoft, Samsung, Snapdeal Adobe, Times Internet 
 
@@ -1062,7 +1062,7 @@ y = s.findMin(arr)
 print(y)
 """
 
-# Given a sorted and rotated array arr[] of distinct elements,
+#28. Given a sorted and rotated array arr[] of distinct elements,
 # the task is to find the index of a target key. Return -1 if the key is not found.
 # mediam level
 # Paytm, Flipkart, Amazon, Microsoft, Snapdeal, D-E-Shaw, FactSet, Hike, MakeMyTrip, Intuit, Adobe, Google, BankBazaar, Times Internet
@@ -1086,4 +1086,38 @@ x= s.search(arr= [5, 6, 7, 8, 9, 10, 1, 2, 3],key = 3)
 y= s.search(arr= [3, 5, 1, 2],key = 6)
 print(x)
 print(y)
+"""
+
+
+# 29. Given an array arr[] where no two adjacent elements are same, find the index of a peak element.
+# An element is considered to be a peak if it is greater than its adjacent elements (if they exist). If there are multiple peak elements,
+# return index of any one of them. The output will be "true" if the index returned by your function is correct; otherwise, it will be "false".
+# Note: Consider the element before the first element and the element after the last element to be negative infinity.
+# basic Level
+# Accolite, Amazon, Visa, Adobe, Google
+
+"""
+class Solution:
+    def peakElement(self, arr):
+        n = len(arr)
+        
+        # Handle the boundary cases
+        if n == 1:  # If there's only one element, it's a peak
+            return 0
+        if arr[0] > arr[1]:  # First element is a peak
+            return 0
+        if arr[n-1] > arr[n-2]:  # Last element is a peak
+            return n-1
+        
+        # Check the middle elements
+        for i in range(1, n-1):
+            if arr[i] > arr[i-1] and arr[i] > arr[i+1]:  # Peak condition
+                return bool(i)
+        
+        return bool(-1)  # This line should never be reached if input follows the constraints
+
+arr = [1, 2, 4, 5, 7, 8, 3]
+solution = Solution()
+index = solution.peakElement(arr)
+print(index)  # Expected output: 2, since 20 is greater than both 3 and 4
 """
