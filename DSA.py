@@ -1121,3 +1121,49 @@ solution = Solution()
 index = solution.peakElement(arr)
 print(index)  # Expected output: 2, since 20 is greater than both 3 and 4
 """
+
+# 30. You are given an array with unique elements of stalls[], which denote the position of a stall.
+#  You are also given an integer k which denotes the number of aggressive cows.
+#  Your task is to assign stalls to k cows such that the minimum distance between any two of them is the maximum possible.
+#  medium Level
+
+"""
+class Solution:
+    def aggressiveCows(self, stalls, k):
+        # Sort the stalls positions
+        stalls.sort()
+        
+        # Helper function to check if it's possible to place cows with at least 'dist' distance apart
+        def canPlaceCows(stalls, k, dist):
+            count = 1  # Place the first cow in the first stall
+            last_position = stalls[0]  # Position of the first cow
+            
+            for i in range(1, len(stalls)):
+                if stalls[i] - last_position >= dist:  # If the current stall is far enough for the next cow
+                    count += 1
+                    last_position = stalls[i]  # Update the position of the last placed cow
+                    if count == k:  # If all cows are placed
+                        return True
+            return False
+        
+        # Binary search on the distance
+        low = 1  # Minimum possible distance
+        high = stalls[-1] - stalls[0]  # Maximum possible distance
+        best_dist = 0
+        
+        while low <= high:
+            mid = (low + high) // 2
+            if canPlaceCows(stalls, k, mid):
+                best_dist = mid  # If we can place cows with this distance, try for a larger distance
+                low = mid + 1
+            else:
+                high = mid - 1
+        
+        return best_dist
+
+
+sol = Solution()
+stalls = [1, 2, 8, 4, 9]
+k = 3
+print(sol.aggressiveCows(stalls, k))  # Output: 3
+"""
