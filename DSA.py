@@ -1167,3 +1167,72 @@ stalls = [1, 2, 8, 4, 9]
 k = 3
 print(sol.aggressiveCows(stalls, k))  # Output: 3
 """
+
+# 30. You are given an array arr[] of integers, where each element arr[i] represents the number of pages in the ith book.
+# You also have an integer k representing the number of students. The task is to allocate books to each student such that:
+
+# Each student receives atleast one book.
+# Each student is assigned a contiguous sequence of books.
+# No book is assigned to more than one student.
+# The objective is to minimize the maximum number of pages assigned to any student. In other words, out of all possible allocations,
+# find the arrangement where the student who receives the most pages still has the smallest possible maximum.
+# Note: Return -1 if a valid assignment is not possible, and allotment should be in contiguous order (see the explanation for better understanding).
+# Medium Level
+# Infosys, Amazon, Microsoft, Google, Codenation, Uber
+
+"""
+class Solution:
+    
+    # Function to find the minimum number of pages.
+    def findPages(self, arr, k):
+        n = len(arr)
+        
+        # If there are fewer books than students, allocation is not possible
+        if n < k:
+            return -1
+        
+        # Helper function to check if a given max number of pages can be assigned to students
+        def canAllocate(arr, k, max_pages):
+            student_count = 1  # Start with the first student
+            current_sum = 0  # Keep track of the current sum of pages for the student
+            
+            for pages in arr:
+                if current_sum + pages > max_pages:
+                    # If adding this book exceeds the max_pages, assign to the next student
+                    student_count += 1
+                    current_sum = pages
+                    
+                    # If we exceed the number of students, return False
+                    if student_count > k:
+                        return False
+                else:
+                    # Otherwise, add the book to the current student's allocation
+                    current_sum += pages
+            
+            return True
+        
+        # Binary search to find the minimum possible maximum number of pages
+        low = max(arr)  # Lower bound of the maximum pages (at least the largest book)
+        high = sum(arr)  # Upper bound of the maximum pages (all books to one student)
+        
+        result = high
+        
+        while low <= high:
+            mid = (low + high) // 2
+            
+            if canAllocate(arr, k, mid):
+                result = mid  # We can allocate with this max, try for a smaller value
+                high = mid - 1
+            else:
+                low = mid + 1  # We cannot allocate with this max, try a larger value
+        
+        return result
+
+
+# Test case
+solution = Solution()
+arr = [12, 34, 67, 90]  # Pages in the books
+k = 2  # Number of students
+print(solution.findPages(arr, k))  # Output: 113
+
+"""
