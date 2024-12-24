@@ -1236,3 +1236,49 @@ k = 2  # Number of students
 print(solution.findPages(arr, k))  # Output: 113
 
 """
+
+
+# 31 Given a strictly sorted 2D matrix mat[][] of size n x m and a number x. Find whether the number x is present in the matrix or not.
+# Note: In a strictly sorted matrix, each row is sorted in strictly increasing order,
+# and the first element of the ith row (i!=0) is greater than the last element of the (i-1)th row.
+# medium level
+# Paytm, Accolite, MakeMyTrip, Ola, Cabs, Oracle, Visa, Goldman, Sachs, Directi, Groupon, InMobi, One97, Polycom, TinyOwl
+
+"""
+mat = [
+    [1, 4, 7, 11],
+    [2, 5, 8, 12],
+    [3, 6, 9, 16],
+    [10, 13, 14, 17]
+]
+x= 5
+
+
+class Solution:
+    
+    #Function to search a given number in row-column sorted matrix.
+    def searchMatrix(self, mat, x): 
+    	# code here 
+    	# Get the dimensions of the matrix
+        n = len(mat)  # Number of rows
+        m = len(mat[0])  # Number of columns
+        
+        # Start from the top-right corner
+        i, j = 0, m - 1
+        
+        # Traverse the matrix
+        while i < n and j >= 0:
+            if mat[i][j] == x:
+                return True  # Number found
+            elif mat[i][j] > x:
+                j -= 1  # Move left
+            else:
+                i += 1  # Move down
+        
+        # If we exit the loop, x is not in the matrix
+        return False
+
+s= Solution()
+x= s.searchMatrix(mat, x)
+print(x)
+"""
