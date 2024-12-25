@@ -1282,3 +1282,53 @@ s= Solution()
 x= s.searchMatrix(mat, x)
 print(x)
 """
+
+
+#32 You are given a 2D matrix mat[][] of size n×m. The task is to modify the matrix such that if mat[i][j] is 0,
+# all the elements in the i-th row and j-th column are set to 0 and do it in constant space complexity.
+# Medium Level
+
+"""
+mat = [[1, -1, 1],
+       [-1, 0, 1],
+       [1, -1, 1]]
+
+class Solution:
+    def setMatrixZeroes(self, mat):
+        n, m = len(mat), len(mat[0])
+        
+        # Flags to check if the first row and first column need to be set to zero
+        first_row_zero = any(mat[0][j] == 0 for j in range(m))
+        first_col_zero = any(mat[i][0] == 0 for i in range(n))
+        
+        # Use first row and first column as markers
+        for i in range(1, n):
+            for j in range(1, m):
+                if mat[i][j] == 0:
+                    mat[i][0] = 0  # Mark row
+                    mat[0][j] = 0  # Mark column
+        
+        # Set the elements to 0 based on the markers in first row and column
+        for i in range(1, n):
+            for j in range(1, m):
+                if mat[i][0] == 0 or mat[0][j] == 0:
+                    mat[i][j] = 0
+        
+        # Handle the first row
+        if first_row_zero:
+            for j in range(m):
+                mat[0][j] = 0
+        
+        # Handle the first column
+        if first_col_zero:
+            for i in range(n):
+                mat[i][0] = 0
+        
+        return mat
+
+
+s= Solution()
+x= s.setMatrixZeroes(mat)
+print(x)
+
+"""
