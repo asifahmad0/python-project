@@ -1330,5 +1330,53 @@ class Solution:
 s= Solution()
 x= s.setMatrixZeroes(mat)
 print(x)
+"""
 
+# 33. Given an array arr[] of positive integers and another integer target.
+# Determine if there exists two distinct indices such that the sum of there elements is equals to target.
+# Easy Level
+# Zoho, Flipkart, Morgan Stanley, Accolite, Amazon, Microsoft, FactSet, Hike, Adobe, Google, Wipro, SAP Labs CarWale
+
+"""
+arr = [1, 4, 45, 6, 10, 8]
+target = 16
+
+
+class Solution:
+	def twoSum(self, arr, target):
+         n = len(arr)
+         for i in range(n):
+            for j in range(1,n):
+                if arr[i]+arr[j]==target:
+                    return arr[i],"+",arr[j]," = ",target
+
+
+s = Solution()
+x = s.twoSum(arr, target)
+print(x)
+"""
+
+# Methord Two 
+"""
+class Solution:
+	def twoSum(self, arr, target):
+		# code here
+		# Create a dictionary to store the numbers we have already seen
+         seen = {}
+        
+        # Iterate through the array
+         for num in arr:
+            # Calculate the complement (the number that, when added to 'num', equals the target)
+            complement = target - num
+            
+            # If the complement is in the dictionary, we have found the pair
+            if complement in seen:
+                return seen[complement], "+", num, "=", target
+            
+            # Store the current number in the dictionary
+            seen[num] = True
+
+s = Solution()
+y = s.twoSum(arr, target)
+print(y)
 """
