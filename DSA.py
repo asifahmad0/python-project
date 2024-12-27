@@ -1380,3 +1380,59 @@ s = Solution()
 y = s.twoSum(arr, target)
 print(y)
 """
+
+
+#34. Given an array arr[] and an integer target. You have to find numbers of pairs in array arr[] which sums up to given target.
+# EASY LEVEL
+
+#Methord 1
+"""
+arr = [1, 5, 7, -1, 5]
+target = 6 
+
+class Solution:
+    #Complete the below function
+    def countPairs(self,arr, target):
+        #Your code here
+        n = len(arr)
+        count=0
+        for i in range(n):
+            for j in range(i+1,n):
+                if arr[i]+arr[j] == target:
+                    print(arr[i],'+',arr[j], '= ', target)
+                    count+=1
+        
+        return count
+
+
+s = Solution()
+x = s.countPairs(arr,target)
+print(x)
+"""
+# Methord 2
+"""
+class Solution:
+    #Complete the below function
+    def countPairs(self,arr, target):
+        #Your code here
+        count_map = {}  # To store the frequency of elements
+        pair_count = 0
+        for num in arr:
+            complement = target - num  # The value we need to form a pair with num
+            
+            # If complement is already in the map, add its frequency to pair_count
+            if complement in count_map:
+                pair_count += count_map[complement]
+            
+            # Update the count of the current number in the map
+            if num in count_map:
+                count_map[num] += 1
+            else:
+                count_map[num] = 1
+        
+        return pair_count
+
+s = Solution()
+y = s.countPairs(arr,target)
+print(y)
+"""
