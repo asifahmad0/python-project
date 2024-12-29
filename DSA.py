@@ -1436,3 +1436,61 @@ s = Solution()
 y = s.countPairs(arr,target)
 print(y)
 """
+
+
+# 35 pair of 3 number = 0
+# Medium Level
+"""
+arr = [1, -2, 1, 0, 5]
+class Solution:
+    def findTriplets(self, arr):
+        result = []
+        
+        # Edge case: If the array has less than 3 elements, no triplet can be formed
+        if len(arr) < 3:
+            return result
+        
+        # Use three loops to find all triplets
+        for i in range(len(arr) - 2):
+            for j in range(i + 1, len(arr) - 1):
+                for k in range(j + 1, len(arr)):
+                    # Check if the sum of arr[i], arr[j], arr[k] is zero
+                    if arr[i] + arr[j] + arr[k] == 0:
+                        # Ensure that the triplet is added in the form i < j < k
+                        result.append([i, j, k])
+        
+        # Return the result list containing all the triplets of indices
+        return result
+        
+      
+
+# Test the solution with the given array
+
+solution = Solution()
+print(solution.findTriplets(arr))
+"""
+
+# 36 Given two integer arrays a[] and b[], you have to find the intersection of the two arrays. 
+# Intersection of two arrays is said to be elements that are common in both arrays. 
+# The intersection should not have duplicate elements and the result should contain items in any order.
+# Note: The driver code will sort the resulting array in increasing order before printing.
+# easy level
+"""
+a = [1, 2, 1, 3, 1]
+b = [3, 1, 3, 4, 1]
+
+class Solution:
+    def intersectionWithDuplicates(self, a, b):
+        # code here
+        s=set(a)
+        b=set(b)
+        ans=[]
+        for i in b:
+            if i in s:
+                ans.append(i)
+        return ans
+
+s = Solution()
+x= s.intersectionWithDuplicates(a,b)
+print(x)
+"""
