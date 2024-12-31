@@ -1494,3 +1494,35 @@ s = Solution()
 x= s.intersectionWithDuplicates(a,b)
 print(x)
 """
+
+#37 Given an array arr[] of non-negative integers. Find the length of the longest sub-sequence such that elements in the subsequence are consecutive integers,
+# the consecutive numbers can be in any order.
+# medium level
+# Amazon, Microsoft, Walmart
+
+"""
+arr =[2, 6, 1, 9, 4, 5, 3]
+# User function Template for python3
+class Solution:
+    
+    # arr[] : the input array
+    
+    #Function to return length of longest subsequence of consecutive integers.
+    def longestConsecutive(self,arr):
+        #code here
+
+        h,ans=set(arr),0
+        for i in arr:
+            if i-1 in h: continue 
+            ele,curr=i,0
+            while ele in h:
+                ele+=1
+                curr+=1
+            ans=max(ans,curr)
+
+        return ans
+
+s = Solution()
+x = s.longestConsecutive(arr)
+print(x)
+"""
