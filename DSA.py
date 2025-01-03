@@ -1622,3 +1622,40 @@ s=Solution()
 x=s.kidsWithCandies(candies,extraCandies)
 print(x)
 """
+
+#41 Given a string s of zeros and ones, return the maximum score after splitting the string into two non-empty substrings (i.e. left substring and right substring).
+# The score after splitting a string is the number of zeros in the left substring plus the number of ones in the right substring.
+# Easy Level
+
+"""
+s="011101"
+t="00111"
+u="1111"
+
+class Solution:
+    def maxScore(self, s: str) -> int:
+        # Initialize counters
+        zeros_in_left = 0
+        ones_in_right = s.count('1')  # Total number of 1's in the string
+        
+        max_score = 0
+        
+        # Traverse through the string to evaluate the score at each split point
+        for i in range(len(s) - 1):  # Exclude the last character to ensure both substrings are non-empty
+            if s[i] == '0':
+                zeros_in_left += 1
+            else:
+                ones_in_right -= 1
+            
+            # Calculate the score for this split
+            score = zeros_in_left + ones_in_right
+            max_score = max(max_score, score)
+        
+        return max_score
+
+so= Solution()
+x=so.maxScore(s)
+y=so.maxScore(t)
+z=so.maxScore(u)
+print(x,y,z)
+"""
