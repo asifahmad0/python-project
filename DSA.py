@@ -1526,3 +1526,99 @@ s = Solution()
 x = s.longestConsecutive(arr)
 print(x)
 """
+
+#38 You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. 
+# If a string is longer than the other, append the additional letters onto the end of the merged string.
+# Return the merged string.
+# easy level
+
+"""
+word1 = "ab"
+word2 = "pqrs"
+class Solution:
+    def mergeAlternately(self, word1, word2):
+        
+        str=[]
+        c=max(len(word1),len(word2))
+        
+        for i in range(c):
+            if i<len(word1):
+                str.append(word1[i])
+            
+            if i<len(word2) !="":
+                str.append(word2[i])
+        
+        
+
+        return ''.join(str)
+
+s = Solution()
+x= s.mergeAlternately(word1, word2)
+print(x)
+"""
+
+#39 For two strings s and t, we say "t divides s" if and only if s = t + t + t + ... + t + t (i.e., t is concatenated with itself one or more times).
+# Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.
+#easy level
+
+"""
+str1 = "ABCABC"
+str2 = "ABC"
+
+class Solution:
+    def gcdOfStrings(self, str1, str2):
+
+        # Helper function to compute gcd of two numbers
+        def gcd(a, b):
+            while b:
+                a, b = b, a % b
+            return a
+        
+        # Get the length of the GCD of the two strings
+        len1, len2 = len(str1), len(str2)
+        gcd_length = gcd(len1, len2)
+        
+        # Candidate substring of length gcd(len1, len2)
+        candidate = str1[:gcd_length]
+        
+        # Check if the candidate can form both str1 and str2
+        if str1 == candidate * (len1 // gcd_length) and str2 == candidate * (len2 // gcd_length):
+            return candidate
+        else:
+            return ""
+
+
+s=Solution()
+x=s.gcdOfStrings(str1,str2)
+print(x)
+"""
+#40 There are n kids with candies. You are given an integer array candies, where each candies[i] represents the number of candies the ith kid has,
+# and an integer extraCandies, denoting the number of extra candies that you have.
+# Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies, 
+# they will have the greatest number of candies among all the kids, or false otherwise.
+# Note that multiple kids can have the greatest number of candies.
+# Easy Level
+
+"""
+candies = [2,3,5,1,3]
+extraCandies = 3
+class Solution:
+    def kidsWithCandies(self, candies, extraCandies):
+
+        m=max(candies)
+        result=[]
+
+        for i in range(len(candies)):
+            if candies[i]+extraCandies>=m:
+
+                result.append(True)
+            else:
+                result.append(False)
+        
+        return result
+
+
+s=Solution()
+x=s.kidsWithCandies(candies,extraCandies)
+print(x)
+"""
