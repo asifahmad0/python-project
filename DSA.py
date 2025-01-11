@@ -1659,3 +1659,52 @@ y=so.maxScore(t)
 z=so.maxScore(u)
 print(x,y,z)
 """
+
+#42. reverse thr words 
+"""
+st = "the sky is blue"
+class Solution:
+    def reverseWords(self, s):
+        
+        stri = s.strip().split()
+        stri.reverse()
+        return " ".join(stri)
+
+so = Solution()
+x = so.reverseWords(st)
+print(x)
+"""
+
+# 43. Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+# The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+# You must write an algorithm that runs in O(n) time and without using the division operation.
+
+"""
+nums = [1,2,3,4]
+num = [-1,1,0,-3,3]
+
+class Solution:
+    def productExceptSelf(self, nums):
+        n = len(nums)
+        answer = [1] * n
+        
+        # Step 1: Compute left products and store them in answer
+        left_product = 1
+        for i in range(n):
+            answer[i] = left_product
+            left_product *= nums[i]
+        
+        # Step 2: Compute right products and multiply with left products in answer
+        right_product = 1
+        for i in range(n - 1, -1, -1):
+            answer[i] *= right_product
+            right_product *= nums[i]
+        
+        return answer
+
+s=Solution()
+x=s.productExceptSelf(nums)
+y = s.productExceptSelf(num)
+print(x) # [24,12,8,6]
+print(y) # [0,0,9,0,0]
+"""
