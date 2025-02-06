@@ -8,7 +8,7 @@ import mysql.connector
 
 pid = random.randint(1,10)*1234567890 #genrate pationt id random
 
-class hospital:
+class hospital: 
     def __init__(self, root):
         self.root = root
         self.root.title('Hospital Managemant system') 
