@@ -11,7 +11,7 @@ pid = random.randint(1,10)*1234567890 #genrate pationt id random
 class hospital:
     def __init__(self, root):
         self.root = root
-        self.root.title('Hospital Managemant system')
+        self.root.title('Hospital Managemant system') 
         self.root.geometry("1540x800+0+0")
 
         self.dateValue = StringVar()
