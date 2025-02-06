@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import random
-import time
+import time 
 import datetime
 import mysql.connector
 
