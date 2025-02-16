@@ -1,6 +1,6 @@
   
 # 1. find second smalest and second largest
-"""
+""" 
 a = [5,24,54,21,65,45,85,47]
 a.sort()
 print(a, end="\n") 
