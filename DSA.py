@@ -1708,3 +1708,13 @@ y = s.productExceptSelf(num)
 print(x) # [24,12,8,6]
 print(y) # [0,0,9,0,0]
 """
+# 44 write a python program that if num == even print even else print odd but without using % oprator 
+# easy
+"""
+num = 5 
+
+if (num & 1) == 0:
+    print("even")
+else:
+    print("odd")
+"""
