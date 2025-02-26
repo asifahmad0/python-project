@@ -1718,3 +1718,29 @@ if (num & 1) == 0:
 else:
     print("odd")
 """
+
+# return sum of sub array
+"""
+nums = [10,20,30,5,10,50]
+nums_2=[10,20,30,40,50]
+class solution:
+    def subArraySum(self,num):
+        
+        if len(num)<=1:
+            return 0
+        
+        numa=set(num)
+
+        sum=0
+        for i in range(len(numa)-1):
+            sum+= num[i]
+
+        return sum
+    
+
+s= solution()
+x= s.subArraySum(nums)
+y= s.subArraySum(nums_2)
+print(x)
+print(y)
+"""
