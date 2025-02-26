@@ -1719,7 +1719,7 @@ else:
     print("odd")
 """
 
-# return sum of sub array
+#45 return sum of sub array
 """
 nums = [10,20,30,5,10,50]
 nums_2=[10,20,30,40,50]
