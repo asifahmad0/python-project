@@ -1729,7 +1729,7 @@ class solution:
         
         if len(num)<=1:
             return 0
-        
+	    
         numa=set(num)
 
         sum=0
@@ -1744,4 +1744,18 @@ x= s.subArraySum(nums)
 y= s.subArraySum(nums_2)
 print(x)
 print(y)
+"""
+#45 Find Sum of Distinct(Non-repeating)element in an array
+"""
+a = [10,15,15,20,10,30]
+
+rep=[]
+
+for num in a:
+    if num not in rep:
+        rep.append(num)
+
+total_sum= sum(rep)
+print(total_sum)
+
 """
