@@ -1745,7 +1745,7 @@ y= s.subArraySum(nums_2)
 print(x)
 print(y)
 """
-#45 Find Sum of Distinct(Non-repeating)element in an array
+#46 Find Sum of Distinct(Non-repeating)element in an array
 """
 a = [10,15,15,20,10,30]
 
