@@ -1771,3 +1771,31 @@ def fib(n):
 
 print(fib(6))
 """
+
+
+#  Binary Search using Recursion
+# Time Complaxity =O(logn)
+# Space Complaxity = O(logn)
+"""
+arr=[-1,0,3,5,9,12]
+tar=5
+
+def search(arr,tar,st,end):
+    
+    if st<=end:
+        mid=int((st+end)/2)
+
+        if(arr[mid]==tar):
+           return mid
+        elif arr[mid]<=tar:
+           return search(arr,tar,mid+1,end)
+        elif arr[mid]>=tar:
+            return search(arr,tar,mid-1,st)
+        else:
+            return f'Target value {tar} not exist'
+    else:
+        return f'Target value {tar} not exist'
+    
+s=search(arr,tar,0,len(arr))
+print(s)
+"""
