@@ -1772,6 +1772,20 @@ def fib(n):
 print(fib(6))
 """
 
+#check array is sorted or not using recursion
+# time complaxity = O(n)
+"""
+arr=[1,2,3,4,5]
+
+def short(arr,n):
+    if n==0 or n==1:
+        return True
+
+    return arr[n-1] >= arr[n-2] and short(arr, n-1)
+
+s=short(arr,5)
+print(s)
+""" 
 
 #  Binary Search using Recursion
 # Time Complaxity =O(logn)
