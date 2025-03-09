@@ -1759,7 +1759,7 @@ print(total_sum)
 
 """
 
-#fibonacci
+# fibonacci
 # Time Complaxity = O(2^n)
 # space complaxity = n-1 * 1
 """
@@ -1772,7 +1772,7 @@ def fib(n):
 print(fib(6))
 """
 
-#check array is sorted or not using recursion
+# check array is sorted or not using recursion
 # time complaxity = O(n)
 """
 arr=[1,2,3,4,5]
