@@ -1813,3 +1813,19 @@ def search(arr,tar,st,end):
 s=search(arr,tar,0,len(arr))
 print(s)
 """
+
+
+# Funde the Last word "WELL" lenth
+"""
+str="ALL IZZ WELL  "
+i=len(str)
+count=0
+while i>=0:
+    i-=1
+    if str[i] != " ":
+        count+=1
+    elif str[i] == " " and count>0:
+        break
+
+print(count)
+"""
