@@ -1759,7 +1759,7 @@ print(total_sum)
 
 """
 
-# fibonacci
+# 47 fibonacci
 # Time Complaxity = O(2^n)
 # space complaxity = n-1 * 1
 """
@@ -1772,7 +1772,7 @@ def fib(n):
 print(fib(6))
 """
 
-# check array is sorted or not using recursion
+# 48 check array is sorted or not using recursion
 # time complaxity = O(n)
 """
 arr=[1,2,3,4,5]
@@ -1787,7 +1787,7 @@ s=short(arr,5)
 print(s)
 """ 
 
-#  Binary Search using Recursion
+# 49 Binary Search using Recursion
 # Time Complaxity =O(logn)
 # Space Complaxity = O(logn)
 """
@@ -1815,7 +1815,7 @@ print(s)
 """
 
 
-# Funde the Last word "WELL" lenth
+#50  Funde the Last word "WELL" lenth
 """
 str="ALL IZZ WELL  "
 i=len(str)
@@ -1828,4 +1828,26 @@ while i>=0:
         break
 
 print(count)
+"""
+# 51 Marge 2 string not cancatinat 
+"""
+str1 = 'Asif'
+str2 = 'Ahmad'
+
+def marg(str1, str2):
+    res=''
+    i=0
+    strlenth=max(len(str1),len(str2))
+
+    while i<strlenth:
+        
+        if len(str1) > i:
+            res+=str1[i]
+        if len(str2) > i:
+            res+=str2[i]
+        i+=1
+    
+    return res
+
+print(marg(str1,str2))
 """
