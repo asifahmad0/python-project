@@ -1851,3 +1851,36 @@ def marg(str1, str2):
 
 print(marg(str1,str2))
 """
+
+
+# 52 Reverse the Array Using 2 Pointer Methord
+"""
+arr= [4,2,7,8,1,2,5]
+
+n=int(len(arr)/2)
+for i in range(n):
+    a=arr[i]
+    arr[i]=arr[len(arr)-(i+1)]
+    arr[len(arr)-(i+1)]=a
+    
+print(arr)
+"""
+# Same like 52 but using Start and end variables
+"""
+arr= [4,2,7,8,1,2,5]
+
+start=0
+end=len(arr)-1
+n=int(end/2)
+
+while start<end:
+    # Swaping the values
+    a=arr[start]
+    arr[start]=arr[end]
+    arr[end]=a
+    # changing start and end value
+    start+=1
+    end-=1
+    
+print(arr)
+"""
