@@ -8,17 +8,18 @@ print(a[1],"  ", a[-2])
 """
 # reverse the unsorted array without using in-build function
 """
-arr = [24,56,82,3,96,,88,47,36]
+arr = [24,56,82,3,96,88,47,36]
 class Solution:
 	def reverse(arr):
-		i=0
+		n= len(arr)//2
 		j=-1
-		while arr[i] != arr[j]:
+		for i in range(n):
 			temp = arr[i]
 			arr[i] = arr[j]
 			arr[j] = temp
-			i = i+1
 			j = j-1
+			
+		return arr
 
 	
 s = Solution
