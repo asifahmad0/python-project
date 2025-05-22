@@ -6,6 +6,25 @@ print(a, end="\n")
 print(a[1],"  ", a[-2])
   
 """
+# reverse the unsorted array without using in-build function
+"""
+arr = [24,56,82,3,96,,88,47,36]
+class Solution:
+	def reverse(arr):
+		i=0
+		j=-1
+		while arr[i] != arr[j]:
+			temp = arr[i]
+			arr[i] = arr[j]
+			arr[j] = temp
+			i = i+1
+			j = j-1
+
+	
+s = Solution
+x= s.reverse(arr)
+print(x)
+"""
   
 
 #  2. find sum and average exercise time of a person in a week input: 30,40,50,35,45,30,40,  
