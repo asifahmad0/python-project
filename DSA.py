@@ -5,7 +5,7 @@ a.sort()
 print(a, end="\n") 
 print(a[1],"  ", a[-2])
   
-"""\
+"""
   
 
 #  2. find sum and average exercise time of a person in a week input: 30,40,50,35,45,30,40,  
